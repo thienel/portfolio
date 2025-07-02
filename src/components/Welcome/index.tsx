@@ -5,6 +5,8 @@ import { useEffect, useRef } from "react";
 
 const cx = classNames.bind(styles);
 
+const WELCOME_TEXT = "LETHIEN"
+
 function Welcome() {
     const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -20,33 +22,29 @@ function Welcome() {
 
         gsap.to(characters, {
             opacity: 1,
-            duration: 1.2,
+            duration: 2,
             stagger: 0.15,
             onUpdate: () => {
-                characters.forEach((character, i) => {
+                characters.forEach(character => {
+                    const randomNumber = Math.floor(Math.random() * 5) + 1;
                     gsap.to(character, {
                         color: "var(--color-white)",
                         duration: 0.2,
-                        delay: i * 0.15
+                        delay: randomNumber * 0.15
                     });
                     gsap.to(character, {
                         color: "var(--color-black)",
                         duration: 0.2,
-                        delay: i * 0.15 + 0.4
+                        delay: randomNumber * 0.15 + 0.5
                     });
                 });
+                console.log("Running")
             },
             onComplete: () => {
-                gsap.to(wrapperRef.current, {
-                    opacity: 0,
-                    duration: 0.5,
-                    delay: 0.3,
-                    onComplete: () => {
-                        if (wrapperRef.current) {
-                            gsap.set(wrapperRef.current, { display: "none" });
-                        }
-                    }
-                });
+                gsap.set(wrapperRef.current, {
+                    delay: 1,
+                    display: "none"
+                })
             }
         });
 
@@ -60,13 +58,11 @@ function Welcome() {
 
     return (
         <div ref={wrapperRef} className={cx("wrapper")}>
-            <span className={cx("character")} data-character>L</span>
-            <span className={cx("character")} data-character>E</span>
-            <span className={cx("character")} data-character>T</span>
-            <span className={cx("character")} data-character>H</span>
-            <span className={cx("character")} data-character>I</span>
-            <span className={cx("character")} data-character>E</span>
-            <span className={cx("character")} data-character>N</span>
+            {
+                WELCOME_TEXT.split('').map((char, i) => (
+                    <span key={i} className={cx("character")} data-character>{char}</span>
+                 ))
+            }
         </div>
     );
 }
