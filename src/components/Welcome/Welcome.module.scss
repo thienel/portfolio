@@ -1,5 +1,13 @@
 .wrapper{
-    position: absolute;
+    position: fixed;
     inset: 0;
-    background-color: $black;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    z-index: 9999;
+}
+
+.character{
+    font-family: $gothic-font;
+    font-size: 120px;
 }
