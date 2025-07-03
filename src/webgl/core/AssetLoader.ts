@@ -37,26 +37,12 @@ export class AssetLoader {
 
     this.manager.onProgress = (url, itemsLoaded, itemsTotal) => {
       const progress: LoadingProgress = { itemsLoaded, itemsTotal, url }
-      this.updateLoadingUI(progress)
       this.onProgress?.(progress)
       console.log(`Loading: ${url}. ${itemsLoaded}/${itemsTotal} files.`)
     }
 
     this.manager.onError = url => {
       console.error(`Failed to load: ${url}`)
-    }
-  }
-
-  private updateLoadingUI(progress: LoadingProgress): void {
-    const { itemsLoaded, itemsTotal, url } = progress
-
-    if (this.loadingElements.progressDOM) {
-      const progressElement = this.loadingElements.progressDOM as HTMLElement
-      progressElement.style.transform = `scaleX(${itemsLoaded / itemsTotal})`
-    }
-
-    if (this.loadingElements.itemsDOM) {
-      this.loadingElements.itemsDOM.textContent = `${itemsLoaded} of ${itemsTotal} files loaded: ${url}`
     }
   }
 

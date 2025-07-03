@@ -62,7 +62,6 @@ export class SceneManager {
       map: assists.bakeTexture,
     })
 
-    // Screen mesh material will be set by screen engine
     group.add(assists.screenMesh)
 
     // Computer components

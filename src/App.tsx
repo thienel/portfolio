@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import LoadingScreen from '@components/LoadingScreen';
 import Welcome from '@components/Welcome';
 import WebGL from './webgl';
 
@@ -21,7 +20,6 @@ function App() {
       <canvas className="webgl"></canvas>
 
       <input type="text" id="textarea" readOnly />
-      <LoadingScreen />
     </>
   );
 }
