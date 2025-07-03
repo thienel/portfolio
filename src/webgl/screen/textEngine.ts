@@ -1,11 +1,12 @@
 import { Font } from 'three/examples/jsm/loaders/FontLoader.js'
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js'
 import * as THREE from 'three'
-import { Assists } from '../loader'
+import { Assists } from '../types'
 import { Change } from '../../terminal'
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js'
 
-const textColor = '#f99021'
+// const textColor = '#f99021'
+const textColor = '#808080'
 
 type FontInfo = {
   font: undefined | Font
