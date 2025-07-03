@@ -1,7 +1,4 @@
-import { FileSystemType } from '../fileSystemBash'
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default function hello(print: (s: string, md?: boolean) => void, path: FileSystemType) {
+export default function hello(print: (s: string, md?: boolean) => void) {
   const docs = {
     name: 'hello',
     short: 'friendly greeting program',

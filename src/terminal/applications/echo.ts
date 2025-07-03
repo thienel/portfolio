@@ -1,7 +1,4 @@
-import { FileSystemType } from '../fileSystemBash'
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default function echo(print: (s: string, md?: boolean) => void, path: FileSystemType) {
+export default function echo(print: (s: string, md?: boolean) => void) {
   const docs = {
     name: 'echo',
     short: 'display a line of text',

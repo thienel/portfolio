@@ -26,11 +26,11 @@ export default function Applications(
     ls: ls(print, path),
     cd: cd(print, path),
     show: show(print, path),
-    echo: echo(print, path),
+    echo: echo(print),
     pwd: pwd(print, path),
     mkdir: mkdir(print, path),
     touch: touch(print, path),
-    hello: hello(print, path),
+    hello: hello(print),
   }
   const getApp = (appName: string): null | ((args: string[], options: string[]) => void) => {
     const app = (
