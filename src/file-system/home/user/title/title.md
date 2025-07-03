@@ -1,16 +1,16 @@
 !(/images/ed-title.png?aspect=2&noflow=true&width=1.33)
 
 
-##   Hi there, 
+##   Hello,
 
-#  *I'm Ed H*
+#  *I'm Le Thien*
 
 ##   • Software Engineer
-##   • Digital Designer
 
 
 
 
 
-### Welcome to ED-Linux 1.0 LTS
+
+### Welcome to my personal portfolio
 ### →→ Scroll or type "help" to get started

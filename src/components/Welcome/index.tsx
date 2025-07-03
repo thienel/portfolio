@@ -7,7 +7,7 @@ const cx = classNames.bind(styles);
 
 const WELCOME_TEXT = "LETHIEN"
 
-function Welcome() {
+function Welcome({ onComplete }: { onComplete?: () => void }) {
     const wrapperRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -41,9 +41,15 @@ function Welcome() {
                 console.log("Running")
             },
             onComplete: () => {
-                gsap.set(wrapperRef.current, {
-                    delay: 1,
-                    display: "none"
+                gsap.to(wrapperRef.current, {
+                    opacity: 0,
+                    duration: 1,
+                    delay: 0.5,
+                    onComplete: () => {
+                        gsap.set(wrapperRef.current, { display: "none", onComplete: () => {
+                            if (onComplete) onComplete();
+                        }});
+                    }
                 })
             }
         });
@@ -51,10 +57,11 @@ function Welcome() {
         return () => {
             gsap.killTweensOf(characters);
             if (wrapperRef.current) {
+                // eslint-disable-next-line react-hooks/exhaustive-deps
                 gsap.killTweensOf(wrapperRef.current);
             }
         };
-    }, []);
+    }, [onComplete]);
 
     return (
         <div ref={wrapperRef} className={cx("wrapper")}>
