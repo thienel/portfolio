@@ -57,19 +57,7 @@ export class SceneManager {
   private createComputerGroup(assists: Assists): THREE.Group {
     const group = new THREE.Group()
 
-    // Setup materials
-    const computerMaterial = new THREE.MeshBasicMaterial({
-      map: assists.bakeTexture,
-    })
-
     group.add(assists.screenMesh)
-
-    // Computer components
-    assists.computerMesh.material = computerMaterial
-    group.add(assists.computerMesh)
-
-    assists.keyboardMesh.material = computerMaterial
-    group.add(assists.keyboardMesh)
 
     // Shadow plane
     assists.shadowPlaneMesh.material = new THREE.MeshBasicMaterial({
