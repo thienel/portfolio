@@ -59,12 +59,6 @@ export class SceneManager {
 
     group.add(assists.screenMesh)
 
-    // Shadow plane
-    assists.shadowPlaneMesh.material = new THREE.MeshBasicMaterial({
-      map: assists.bakeFloorTexture,
-    })
-    group.add(assists.shadowPlaneMesh)
-
     // Initial positioning
     group.position.x = this.controlProps.computerHorizontal
     group.position.y = this.controlProps.computerHeight
@@ -118,8 +112,7 @@ export class SceneManager {
     this.camera.lookAt(new THREE.Vector3(0, 0, 0))
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public updateComputerGroup(scroll: number, assists: Assists): void {
+  public updateComputerGroup(scroll: number): void {
     const zoomFac = clampedMap(scroll, [0, 1], [0, 1])
 
     // Update computer group positioning

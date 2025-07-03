@@ -195,7 +195,6 @@ export class AssetLoader {
         gltf => {
           try {
             this.assists.screenMesh = this.getMeshByName(gltf, 'Screen')
-            this.assists.shadowPlaneMesh = this.getMeshByName(gltf, 'ShadowPlane')
             resolve()
           } catch (error) {
             console.error('Error processing GLTF model:', error)

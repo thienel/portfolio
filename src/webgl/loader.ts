@@ -4,7 +4,6 @@ import { Font, FontLoader } from 'three/examples/jsm/loaders/FontLoader.js'
 
 type Assists = {
   screenMesh: THREE.Mesh
-  shadowPlaneMesh: THREE.Mesh
   bakeTexture: THREE.Texture
   bakeFloorTexture: THREE.Texture
   publicPixelFont: Font
@@ -102,7 +101,6 @@ function loadAssists(callback: (assists: Assists) => void) {
     }
 
     assists.screenMesh = getMeshByName('Screen')
-    assists.shadowPlaneMesh = getMeshByName('ShadowPlane')
   })
 }
 

@@ -119,7 +119,7 @@ export class WebGLController {
     this.sceneManager.updateCamera(this.scroll, parallax)
 
     // Update computer group
-    this.sceneManager.updateComputerGroup(this.scroll, this.assists)
+    this.sceneManager.updateComputerGroup(this.scroll)
 
     // Update canvas opacity
     this.sceneManager.updateCanvasOpacity(this.scroll)
