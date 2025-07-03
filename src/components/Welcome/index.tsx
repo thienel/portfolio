@@ -28,12 +28,12 @@ function Welcome() {
                 characters.forEach(character => {
                     const randomNumber = Math.floor(Math.random() * 5) + 1;
                     gsap.to(character, {
-                        color: "var(--color-white)",
+                        opacity: 1,
                         duration: 0.2,
                         delay: randomNumber * 0.15
                     });
                     gsap.to(character, {
-                        color: "var(--color-black)",
+                        opacity: 0,
                         duration: 0.2,
                         delay: randomNumber * 0.15 + 0.5
                     });

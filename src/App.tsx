@@ -1,11 +1,23 @@
-import Welcome from '@components/Welcome'
+import { useEffect } from 'react';
+import LoadingScreen from '@components/LoadingScreen';
+import Welcome from '@components/Welcome';
+import WebGL from './webgl';
 
 function App() {
+  useEffect(() => {
+    WebGL()
+  }, []);
+
   return (
-      <div >
-        <Welcome/>
-      </div>
-  )
+    <>
+      <Welcome />
+      <div id="home"></div>
+      <canvas className="webgl"></canvas>
+
+      <input type="text" id="textarea" readOnly />
+      <LoadingScreen />
+    </>
+  );
 }
 
-export default App
+export default App;
