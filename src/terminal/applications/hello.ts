@@ -1,15 +1,14 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import FileSystemBash, { FileSystemType } from '../fileSystemBash'
+import { FileSystemType } from '../fileSystemBash'
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function hello(print: (s: string, md?: boolean) => void, path: FileSystemType) {
-  const fileSystem = FileSystemBash()
   const docs = {
     name: 'hello',
     short: 'friendly greeting program',
     long: '',
   }
 
-  const app = (args: string[], options: string[]) => {
+  const app = (_args: string[], options: string[]) => {
     if (options.find(o => o === '-h' || o === '-help')) {
       print(`\n${docs.name} – ${docs.short}`)
       return

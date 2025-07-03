@@ -1,16 +1,16 @@
-import * as THREE from "three";
-import vertexShader from "../shaders/vertex.vert?raw";
-import lagFragmentShader from "../shaders/lag.frag?raw";
-import { ShaderToScreen } from "./shaderToScreen";
+import * as THREE from 'three'
+import vertexShader from '../shaders/vertex.vert?raw'
+import lagFragmentShader from '../shaders/lag.frag?raw'
+import { ShaderToScreen } from './shaderToScreen'
 
 class Lag {
-  outputCopy: ShaderToScreen;
-  shaderToScreen1: ShaderToScreen;
-  outputTexture: THREE.WebGLRenderTarget;
+  outputCopy: ShaderToScreen
+  shaderToScreen1: ShaderToScreen
+  outputTexture: THREE.WebGLRenderTarget
 
-  lagMat: THREE.ShaderMaterial;
+  lagMat: THREE.ShaderMaterial
   constructor(buffer: THREE.WebGLRenderTarget, width: number, height: number) {
-    this.lagMat = new THREE.ShaderMaterial();
+    this.lagMat = new THREE.ShaderMaterial()
     this.shaderToScreen1 = new ShaderToScreen(
       {
         uniforms: {
@@ -22,9 +22,9 @@ class Lag {
         fragmentShader: lagFragmentShader,
       },
       width,
-      height
-    );
-    this.outputTexture = this.shaderToScreen1.outputTexture;
+      height,
+    )
+    this.outputTexture = this.shaderToScreen1.outputTexture
 
     this.outputCopy = new ShaderToScreen(
       {
@@ -35,17 +35,16 @@ class Lag {
         fragmentShader: `uniform sampler2D uDiffuse; varying vec2 vUv; void main() {gl_FragColor = texture2D(uDiffuse, vUv);}`,
       },
       width,
-      height
-    );
+      height,
+    )
 
-    this.shaderToScreen1.shader.uniforms.uLagTex.value =
-      this.outputCopy.outputTexture.texture;
+    this.shaderToScreen1.shader.uniforms.uLagTex.value = this.outputCopy.outputTexture.texture
   }
 
-  render(renderer: THREE.WebGLRenderer, tex?: THREE.Texture) {
-    this.shaderToScreen1.render(renderer);
-    this.outputCopy.render(renderer);
+  render(renderer: THREE.WebGLRenderer) {
+    this.shaderToScreen1.render(renderer)
+    this.outputCopy.render(renderer)
   }
 }
 
-export { Lag };
+export { Lag }

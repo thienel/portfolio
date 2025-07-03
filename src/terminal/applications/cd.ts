@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import FileSystemBash, { FileSystemType, FolderBash } from '../fileSystemBash'
 
 export default function cd(print: (s: string, md?: boolean) => void, path: FileSystemType) {
@@ -32,7 +31,7 @@ export default function cd(print: (s: string, md?: boolean) => void, path: FileS
       return
     }
 
-    path.p = operation as any
+    path.p = operation
   }
   return { docs, app }
 }

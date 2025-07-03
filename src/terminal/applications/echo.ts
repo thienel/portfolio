@@ -1,6 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import FileSystemBash, { FileSystemType } from '../fileSystemBash'
+import { FileSystemType } from '../fileSystemBash'
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function echo(print: (s: string, md?: boolean) => void, path: FileSystemType) {
   const docs = {
     name: 'echo',

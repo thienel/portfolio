@@ -1,15 +1,6 @@
 import FileSystemBash from './fileSystemBash'
 import Applications from './applications'
 
-type Cmd = {
-  docs: {
-    name: string
-    short: string
-    long: string
-  }
-  cmd: (self: Cmd, args: string[], options: string[]) => void
-}
-
 export default function Bash(print: (s: string, md?: boolean) => void) {
   const fileSystem = FileSystemBash()
   const path = { p: fileSystem.goHome() }

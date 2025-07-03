@@ -142,7 +142,7 @@ export default function WebGL() {
     })
     renderer.setSize(sizes.width, sizes.height)
     renderer.setPixelRatio(2)
-    renderer.outputEncoding = THREE.sRGBEncoding
+    renderer.outputColorSpace = THREE.SRGBColorSpace
 
     function updateCanvasSize(width: number, height: number) {
       // Update camera

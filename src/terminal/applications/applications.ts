@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import FileSystemBash, { FileSystemType, FolderBash } from '../fileSystemBash'
+import { FileSystemType } from '../fileSystemBash'
 import cd from './cd'
 import echo from './echo'
 import hello from './hello'
@@ -15,10 +13,10 @@ export default function Applications(
   print: (s: string, md?: boolean) => void,
   path: FileSystemType,
 ) {
-  const help = (args: string[], options: string[]) => {
+  const help = () => {
     let helpStr: string = helpMD
     Object.entries(apps).forEach(entry => {
-      const [key, value] = entry
+      const [, value] = entry
       helpStr += `### ${value.docs.name} - ${value.docs.short}\n`
     })
     console.log(helpStr)
@@ -34,8 +32,10 @@ export default function Applications(
     touch: touch(print, path),
     hello: hello(print, path),
   }
-  const getApp = (appName: string): null | ((args: string[], options: string[]) => any) => {
-    const app = (apps as any)[appName]
+  const getApp = (appName: string): null | ((args: string[], options: string[]) => void) => {
+    const app = (
+      apps as Record<string, { app: (args: string[], options: string[]) => void } | undefined>
+    )[appName]
     if (app) return app.app
 
     if (appName === 'help') return help
