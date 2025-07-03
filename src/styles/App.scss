@@ -1,0 +1,35 @@
+
+@font-face {
+  font-family: public-pixel;
+  src: url("/fonts/public-pixel.woff");
+}
+@font-face {
+  font-family: chill;
+  src: url("/fonts/chill.woff");
+}
+
+.webgl {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  outline: none;
+  z-index: 1;
+}
+
+.webgl:active {
+  cursor: grabbing;
+}
+
+#textarea {
+  position: fixed;
+  top: 0;
+  right: 0;
+  outline: none;
+  z-index: -1;
+  opacity: 0;
+}
+
+#loading {
+    display: none;
+}
+

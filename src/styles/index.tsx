@@ -1,4 +1,5 @@
 import './reset.scss'
+import './App.scss'
 import { type ReactNode } from 'react'
 
 function GlobalStyles({ children }: { children: ReactNode }) {

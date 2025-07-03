@@ -1,0 +1,201 @@
+import titleText from '../../file-system/home/user/title/title.md?raw'
+import { BashEmulator } from './BashEmulator'
+import { TerminalEngine } from '../types'
+import { calculateStringEditDistance } from '../utils'
+
+export class TerminalController {
+  private bash: BashEmulator | null = null
+  private textEngine: TerminalEngine
+  private textarea: HTMLTextAreaElement
+  private canvas: HTMLCanvasElement
+  private lastSelection: number = 0
+  private oldText: string = ''
+  private isInitialized: boolean = false
+
+  constructor(
+    textEngine: TerminalEngine,
+    textarea: HTMLTextAreaElement,
+    canvas: HTMLCanvasElement,
+  ) {
+    this.textEngine = textEngine
+    this.textarea = textarea
+    this.canvas = canvas
+
+    this.initialize()
+  }
+
+  private initialize(): void {
+    this.setupTextarea()
+    this.setupBash()
+    this.setupEventListeners()
+    this.displayWelcome()
+    this.isInitialized = true
+  }
+
+  private setupTextarea(): void {
+    this.textarea.value = ''
+    this.textarea.readOnly = true
+    this.textarea.blur()
+  }
+
+  private setupBash(): void {
+    this.bash = new BashEmulator(
+      (text: string, isMarkdown: boolean = false) => {
+        this.printToScreen(text, isMarkdown)
+      },
+      { p: [] }, // This should be initialized with proper file system
+    )
+  }
+
+  private setupEventListeners(): void {
+    // Input handling
+    this.textarea.addEventListener('input', () => {
+      this.handleInput()
+    })
+
+    // Canvas click handling
+    this.canvas.addEventListener('pointerup', (event: PointerEvent) => {
+      this.handleCanvasClick(event)
+    })
+
+    // Keyboard handling
+    window.addEventListener('keypress', (event: KeyboardEvent) => {
+      this.handleKeyPress(event)
+    })
+
+    window.addEventListener('keydown', (event: KeyboardEvent) => {
+      this.handleKeyDown(event)
+    })
+
+    // Selection handling
+    document.addEventListener('selectionchange', () => {
+      this.handleSelectionChange()
+    })
+  }
+
+  private displayWelcome(): void {
+    this.textEngine.placeMarkdown(titleText)
+    this.textEngine.placeText('user:~$')
+  }
+
+  private printToScreen(text: string, isMarkdown: boolean): void {
+    if (isMarkdown) {
+      const numOfPixels = this.textEngine.placeMarkdown(text)
+      this.textEngine.scroll(numOfPixels, 'px', {
+        updateMaxScroll: true,
+        moveView: false,
+      })
+      this.textEngine.scroll(12, 'lines', {
+        updateMaxScroll: false,
+        moveView: true,
+      })
+    } else {
+      const numOfLines = this.textEngine.placeText(text)
+      this.textEngine.scroll(numOfLines, 'lines')
+    }
+  }
+
+  private handleInput(): void {
+    const change = calculateStringEditDistance(this.oldText, this.textarea.value)
+    this.oldText = this.textarea.value
+
+    if (change) {
+      this.textEngine.userInput(change, this.textarea.selectionStart)
+    }
+
+    this.textEngine.scrollToEnd()
+  }
+
+  private handleCanvasClick(event: PointerEvent): void {
+    if (event.pointerType === 'mouse') {
+      this.textarea.readOnly = false
+      this.textarea.focus()
+      this.textarea.setSelectionRange(this.lastSelection, this.lastSelection)
+    } else {
+      this.textarea.readOnly = true
+      this.textarea.blur()
+    }
+  }
+
+  private handleKeyPress(event: KeyboardEvent): void {
+    if (this.textarea.readOnly === true || document.activeElement?.id !== 'textarea') {
+      this.textarea.readOnly = false
+      this.textarea.focus()
+
+      if (event.key.length === 1) {
+        this.textarea.value =
+          this.textarea.value.slice(0, this.lastSelection) +
+          event.key +
+          this.textarea.value.slice(this.lastSelection)
+        this.lastSelection += 1
+        this.handleInput()
+      }
+
+      this.textarea.setSelectionRange(this.lastSelection, this.lastSelection)
+    }
+
+    if (event.key === 'Enter') {
+      this.executeCommand()
+    }
+  }
+
+  private handleKeyDown(event: KeyboardEvent): void {
+    switch (event.key) {
+      case 'ArrowUp':
+        event.preventDefault()
+        this.textEngine.scroll(-1, 'lines', {
+          moveView: true,
+          updateMaxScroll: false,
+        })
+        break
+      case 'ArrowDown':
+        event.preventDefault()
+        this.textEngine.scroll(1, 'lines', {
+          moveView: true,
+          updateMaxScroll: false,
+        })
+        break
+    }
+  }
+
+  private handleSelectionChange(): void {
+    if (this.textarea.selectionStart !== this.textarea.selectionEnd) {
+      this.textarea.setSelectionRange(this.lastSelection, this.lastSelection)
+    }
+
+    this.lastSelection = this.textarea.selectionStart
+    this.textEngine.userInput({ type: 'none', loc: 'none', str: '' }, this.textarea.selectionStart)
+  }
+
+  private executeCommand(): void {
+    if (!this.bash) return
+
+    this.textEngine.freezeInput()
+    this.bash.input(this.textarea.value)
+
+    this.textarea.value = ''
+    const change = calculateStringEditDistance(this.oldText, this.textarea.value)
+    this.oldText = this.textarea.value
+
+    if (change) {
+      this.textEngine.userInput(change, this.textarea.selectionStart)
+    }
+  }
+
+  public getBash(): BashEmulator | null {
+    return this.bash
+  }
+
+  public getTextEngine(): TerminalEngine {
+    return this.textEngine
+  }
+
+  public isReady(): boolean {
+    return this.isInitialized
+  }
+
+  public dispose(): void {
+    // Clean up event listeners would go here
+    this.isInitialized = false
+  }
+}
