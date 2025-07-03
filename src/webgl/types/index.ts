@@ -5,7 +5,6 @@ import { Change } from '../../terminal/types'
 export interface Assists {
   screenMesh: THREE.Mesh
   computerMesh: THREE.Mesh
-  crtMesh: THREE.Mesh
   keyboardMesh: THREE.Mesh
   shadowPlaneMesh: THREE.Mesh
   bakeTexture: THREE.Texture

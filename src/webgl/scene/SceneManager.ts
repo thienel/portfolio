@@ -68,9 +68,6 @@ export class SceneManager {
     assists.computerMesh.material = computerMaterial
     group.add(assists.computerMesh)
 
-    assists.crtMesh.material = computerMaterial
-    group.add(assists.crtMesh)
-
     assists.keyboardMesh.material = computerMaterial
     group.add(assists.keyboardMesh)
 
@@ -133,6 +130,7 @@ export class SceneManager {
     this.camera.lookAt(new THREE.Vector3(0, 0, 0))
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public updateComputerGroup(scroll: number, assists: Assists): void {
     const zoomFac = clampedMap(scroll, [0, 1], [0, 1])
 
@@ -153,9 +151,6 @@ export class SceneManager {
     }
 
     // CRT morphing effect
-    if (assists.crtMesh.morphTargetInfluences) {
-      assists.crtMesh.morphTargetInfluences[0] = clampedMap(zoomFac, [0, 0.1], [0.5, 0])
-    }
   }
 
   public updateCanvasOpacity(scroll: number): void {

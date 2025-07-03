@@ -196,7 +196,6 @@ export class AssetLoader {
           try {
             this.assists.screenMesh = this.getMeshByName(gltf, 'Screen')
             this.assists.computerMesh = this.getMeshByName(gltf, 'Computer')
-            this.assists.crtMesh = this.getMeshByName(gltf, 'CRT')
             this.assists.keyboardMesh = this.getMeshByName(gltf, 'Keyboard')
             this.assists.shadowPlaneMesh = this.getMeshByName(gltf, 'ShadowPlane')
             resolve()
