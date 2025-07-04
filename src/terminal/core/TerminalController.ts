@@ -1,7 +1,7 @@
 import titleText from '../../file-system/home/user/title/title.md?raw'
 import { BashEmulator } from './BashEmulator'
-import { TerminalEngine } from '../types'
-import { calculateStringEditDistance } from '../utils'
+import { FileSystemNode, FileSystemPath, TerminalEngine } from '../types'
+import { calculateStringEditDistance, generateFS } from '../utils'
 
 export class TerminalController {
   private bash: BashEmulator | null = null
@@ -11,6 +11,7 @@ export class TerminalController {
   private lastSelection: number = 0
   private oldText: string = ''
   private isInitialized: boolean = false
+  private rootNode: FileSystemNode | null = null
 
   constructor(
     textEngine: TerminalEngine,
@@ -39,11 +40,21 @@ export class TerminalController {
   }
 
   private setupBash(): void {
+    const files = import.meta.glob('/src/file-system/**/*.md', {
+      query: '?raw',
+      import: 'default',
+      eager: true,
+    }) as Record<string, string>
+
+    const fsTree = generateFS(files) as FileSystemPath
+    this.rootNode = { name: 'root', type: 'directory', children: fsTree.p } as FileSystemNode
+
     this.bash = new BashEmulator(
       (text: string, isMarkdown: boolean = false) => {
         this.printToScreen(text, isMarkdown)
       },
-      { p: [] }, // This should be initialized with proper file system
+      fsTree,
+      this.rootNode,
     )
   }
 
@@ -75,7 +86,7 @@ export class TerminalController {
 
   private displayWelcome(): void {
     this.textEngine.placeMarkdown(titleText)
-    this.textEngine.placeText('user:~$')
+    this.textEngine.placeText('\nuser:~$')
   }
 
   private printToScreen(text: string, isMarkdown: boolean): void {

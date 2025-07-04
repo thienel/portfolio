@@ -1,11 +1,11 @@
 !(/images/ed-title.png?aspect=2&noflow=true&width=1.33)
 
 
-##   Hello,
+##   You've found me,
 
 #  *I'm Le Thien*
 
-##   • Software Engineer
+##   • Fullstack Developer
 
 
 

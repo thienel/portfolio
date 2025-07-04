@@ -1,21 +1,21 @@
-import FileSystemBash, { FileSystemType } from '../fileSystemBash'
+import { FileBash, FolderBash } from '../fileSystemBash'
+import { FileSystemPath, PrintFunction } from '../types'
 
-export default function ls(print: (s: string, md?: boolean) => void, path: FileSystemType) {
-  const fileSystem = FileSystemBash()
+export default function ls(print: PrintFunction, path: FileSystemPath) {
   const docs = {
     name: 'ls',
-    short: 'list directory contents',
-    long: '',
+    short: 'List directory contents',
+    description: 'Show files and folders in the current directory.',
   }
 
-  const app = (_args: string[], options: string[]) => {
-    if (options.find(o => o === '-h' || o === '-help')) {
-      print(`\n${docs.name} – ${docs.short}`)
+  const app = () => {
+    let out = '\n'
+    if (!path.p[path.p.length - 1]) {
+      out += 'No current directory set.\n'
+      print(out)
       return
     }
-
-    let out = '\n'
-    const files = fileSystem.getChildren(path.p)
+    const files = path.p[path.p.length - 1].children as (FileBash | FolderBash)[]
     for (const f of files) {
       out += `${f.name}\n`
     }

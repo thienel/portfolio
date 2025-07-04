@@ -37,7 +37,7 @@ function generateFS(fileMap: Record<string, string>) {
 }
 
 generateFS(
-  import.meta.glob('../file-system/**/*.md', {
+  import.meta.glob('~/file-system/**/*.md', {
     query: '?raw',
     import: 'default',
     eager: true,
@@ -45,7 +45,7 @@ generateFS(
 )
 
 generateFS(
-  import.meta.glob('../file-system/**/*.png', {
+  import.meta.glob('~/file-system/**/*.png', {
     query: '?url',
     import: 'default',
     eager: true,
@@ -57,7 +57,6 @@ console.log(disk)
 export default function FileSystemBash() {
   function _pathStrToArr(p: string) {
     const pathArray = p.split('/')
-    // remove trailling slash
     if (pathArray.length > 0 && pathArray[pathArray.length - 1] === '') {
       pathArray.pop()
     }

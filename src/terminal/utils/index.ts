@@ -1,4 +1,4 @@
-import { Change } from '../types'
+import { Change, FileSystemNode, FileSystemPath } from '../types'
 
 /**
  * Calculates the difference between two strings and returns a Change object
@@ -65,28 +65,6 @@ export function calculateStringEditDistance(oldStr: string, newStr: string): Cha
 }
 
 /**
- * Parses command line arguments into args and options
- * @param args - Array of command line arguments
- * @returns Tuple of [args, options]
- */
-export function parseCommandArgs(args: string[]): [string[], string[]] {
-  const parsedArgs: string[] = []
-  const options: string[] = []
-
-  args.forEach(arg => {
-    if (arg === '') return
-
-    if (arg.charAt(0) === '-') {
-      options.push(arg)
-    } else {
-      parsedArgs.push(arg)
-    }
-  })
-
-  return [parsedArgs, options]
-}
-
-/**
  * Sanitizes command input by normalizing whitespace
  * @param command - Raw command input
  * @returns Sanitized command
@@ -115,20 +93,9 @@ export function splitCommand(command: string): [string, string[]] {
  * @returns Formatted path string
  */
 export function formatPath(path: Array<{ name: string }>): string {
-  let output = ''
-  for (let i = 0; i < path.length; i++) {
-    output += path[i].name
-    if (i !== 0 && i < path.length - 1) {
-      output += '/'
-    }
-  }
-
-  output = output.replace(/^\/home\/user/, '~')
-  if (output !== '~') {
-    output += ' '
-  }
-
-  return output
+  const fullPath = path.map(p => p.name).join('/')
+  const shortened = fullPath.replace(/^\/home/, '~')
+  return shortened === '~' ? '~' : `${shortened} `
 }
 
 /**
@@ -143,23 +110,6 @@ export function createPrompt(path: Array<{ name: string }>, user: string = 'user
 }
 
 /**
- * Validates if a string is a valid filename
- * @param filename - Filename to validate
- * @returns True if valid filename
- */
-export function isValidFilename(filename: string): boolean {
-  // Basic filename validation - no special characters
-  const invalidChars = /[<>:"/\\|?*]/
-  const hasControlChars = filename.split('').some(char => char.charCodeAt(0) < 32)
-  return (
-    !invalidChars.test(filename) &&
-    !hasControlChars &&
-    filename.length > 0 &&
-    filename.length <= 255
-  )
-}
-
-/**
  * Escapes special characters in a string for safe output
  * @param str - String to escape
  * @returns Escaped string
@@ -171,4 +121,51 @@ export function escapeString(str: string): string {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;')
+}
+
+export function generateFS(files: Record<string, string>): FileSystemPath {
+  const tree: FileSystemPath = { p: [] }
+
+  for (const path in files) {
+    const cleanPath = path.replace('/src/file-system/', '')
+    const parts = cleanPath.split('/')
+
+    let currentChildren = tree.p
+
+    for (let i = 0; i < parts.length; i++) {
+      const part = parts[i]
+      const isLast = i === parts.length - 1
+
+      if (isLast) {
+        currentChildren.push({
+          name: part,
+          type: 'file',
+          content: files[path],
+        })
+      } else {
+        let dir = currentChildren.find(n => n.name === part && n.type === 'directory')
+
+        if (!dir) {
+          dir = {
+            name: part,
+            type: 'directory',
+            children: [],
+          }
+          currentChildren.push(dir)
+        }
+
+        currentChildren = dir.children!
+      }
+    }
+  }
+
+  return tree
+}
+
+export function resolveCurrentDir(root: FileSystemNode, path: FileSystemPath): FileSystemNode {
+  return path.p.reduce((dir, node) => {
+    const next = dir.children?.find(c => c.name === node.name && c.type === 'directory')
+    if (!next) throw new Error('Invalid path')
+    return next
+  }, root)
 }

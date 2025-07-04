@@ -1,14 +1,27 @@
-import { PrintFunction, FileSystemPath, ApplicationRegistry, ApplicationDefinition } from '../types'
-import { parseCommandArgs, sanitizeCommand, splitCommand, createPrompt } from '../utils'
+import { registerApplications } from '../applications'
+import {
+  PrintFunction,
+  FileSystemPath,
+  ApplicationRegistry,
+  ApplicationDefinition,
+  FileSystemNode,
+} from '../types'
+import { sanitizeCommand, splitCommand, createPrompt } from '../utils'
 
 export class CommandProcessor {
   private applications: ApplicationRegistry = {}
   private fileSystemPath: FileSystemPath
+  private rootNode: FileSystemNode
   private printFunction: PrintFunction
 
-  constructor(printFunction: PrintFunction, fileSystemPath: FileSystemPath) {
+  constructor(
+    printFunction: PrintFunction,
+    fileSystemPath: FileSystemPath,
+    rootNode: FileSystemNode,
+  ) {
     this.printFunction = printFunction
     this.fileSystemPath = fileSystemPath
+    this.rootNode = rootNode
     this.setupBuiltinCommands()
   }
 
@@ -30,6 +43,13 @@ export class CommandProcessor {
         description: 'Clears all content from the terminal screen',
       },
     })
+
+    registerApplications(
+      (name, definition) => this.registerApplication(name, definition),
+      this.printFunction,
+      this.fileSystemPath,
+      this.rootNode,
+    )
   }
 
   public registerApplication(name: string, definition: ApplicationDefinition): void {
@@ -50,8 +70,7 @@ export class CommandProcessor {
     const application = this.applications[commandName]
     if (application) {
       try {
-        const [parsedArgs, options] = parseCommandArgs(args)
-        application.app(parsedArgs, options)
+        application.app(args)
       } catch (error) {
         this.printFunction(`\nError executing ${commandName}: ${error}`)
       }
@@ -63,7 +82,7 @@ export class CommandProcessor {
   }
 
   private showHelp(): void {
-    let helpText = '\n## Available Commands\n\n'
+    let helpText = '\n\n## Available Commands\n\n'
 
     Object.entries(this.applications).forEach(([name, definition]) => {
       helpText += `**${name}** - ${definition.docs.short}\n`
@@ -77,8 +96,6 @@ export class CommandProcessor {
   }
 
   private clearScreen(): void {
-    // This would need to be implemented by the terminal engine
-    // For now, just add some spacing
     this.printFunction('\n'.repeat(20))
   }
 
@@ -100,9 +117,13 @@ export class BashEmulator {
   private commandProcessor: CommandProcessor
   private fileSystemPath: FileSystemPath
 
-  constructor(printFunction: PrintFunction, fileSystemPath: FileSystemPath) {
+  constructor(
+    printFunction: PrintFunction,
+    fileSystemPath: FileSystemPath,
+    rootNode: FileSystemNode,
+  ) {
     this.fileSystemPath = fileSystemPath
-    this.commandProcessor = new CommandProcessor(printFunction, fileSystemPath)
+    this.commandProcessor = new CommandProcessor(printFunction, fileSystemPath, rootNode)
   }
 
   public registerApplication(name: string, definition: ApplicationDefinition): void {

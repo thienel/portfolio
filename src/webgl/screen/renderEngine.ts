@@ -19,7 +19,7 @@ export default function ScreenRenderEngine(
   sceneRTT.add(cameraRTT)
   cameraRTT.position.set(0, 0, 1)
 
-  const rtTexture = new THREE.WebGLRenderTarget(resolution * 1.33, resolution, {
+  const rtTexture = new THREE.WebGLRenderTarget(resolution * 2, resolution, {
     format: THREE.RGBAFormat,
   })
 
@@ -39,7 +39,7 @@ export default function ScreenRenderEngine(
     fragmentShader: noiseFragmentShader,
   })
 
-  const bloomPass = new UnrealBloomPass(new THREE.Vector2(128, 128), 1.1, 0.4, 0)
+  const bloomPass = new UnrealBloomPass(new THREE.Vector2(128, 128), 0.5, 0.5, 0)
   composer.addPass(bloomPass)
 
   const lag = new Lag(composer.readBuffer, resolution * 1.33, resolution)
@@ -77,16 +77,16 @@ export default function ScreenRenderEngine(
       vertexShader: vertexShader,
       fragmentShader: noiseFragmentShader,
     },
-    resolution * 1.33,
+    resolution * 2,
     resolution,
   )
 
   shaderToScreen.outputTexture.texture.colorSpace = THREE.SRGBColorSpace
   const material = new THREE.MeshStandardMaterial()
-  material.metalness = 0
+  material.metalness = -0.25
   material.roughness = 0.125
   material.envMap = environmentMapTexture
-  material.envMapIntensity = 0.7
+  material.envMapIntensity = 0.25
   material.map = shaderToScreen.outputTexture.texture
 
   return { tick, material }

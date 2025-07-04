@@ -1,37 +1,47 @@
-import FileSystemBash, { FileSystemType, FolderBash } from '../fileSystemBash'
+import { FileSystemNode, FileSystemPath, PrintFunction } from '../types'
+import { resolveCurrentDir } from '../utils'
 
-export default function cd(print: (s: string, md?: boolean) => void, path: FileSystemType) {
-  const fileSystem = FileSystemBash()
+export default function cd(print: PrintFunction, path: FileSystemPath, root: FileSystemNode) {
   const docs = {
     name: 'cd',
     short: 'change directory',
-    long: '',
+    description: 'Change to a subdirectory or go back to root.',
   }
 
-  const app = (args: string[], options: string[]) => {
-    if (options.find(o => o === '-h' || o === '-help')) {
-      print(`\n${docs.name} – ${docs.short}`)
+  const app = (args: string[]) => {
+    if (args.length === 0 || args[0] === '~') {
+      path.p = [] // về root
       return
     }
 
-    if (args.length === 0 || args[0] === '') {
-      path.p = fileSystem.goHome()
-      return
-    }
-    const operation = fileSystem.goto(path.p, args[0])
-    console.log(operation)
+    const parts = args[0].split('/').filter(Boolean)
+    const newPath: FileSystemNode[] = [...path.p]
+    let current = resolveCurrentDir(root, path)
 
-    if (!operation) {
-      print(`\nNo such file or directory`)
-      return
-    }
-    if (!('children' in (operation[operation.length - 1] as FolderBash))) {
-      print(`\n${operation[operation.length - 1]?.name}:not a directory`)
+    for (const part of parts) {
+      if (part === '..') {
+        newPath.pop()
+        current = resolveCurrentDir(root, { p: newPath })
+        continue
+      }
 
-      return
+      if (!current.children) {
+        print(`\nNot a directory`)
+        return
+      }
+
+      const next = current.children.find(c => c.name === part && c.type === 'directory')
+      if (!next) {
+        print(`\n${part}: No such directory`)
+        return
+      }
+
+      newPath.push(next)
+      current = next
     }
 
-    path.p = operation
+    path.p = newPath
   }
+
   return { docs, app }
 }

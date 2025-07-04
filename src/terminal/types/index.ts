@@ -16,7 +16,7 @@ export interface FileSystemPath {
 }
 
 export interface ApplicationDefinition {
-  app: (args: string[], options: string[]) => void
+  app: (args: string[]) => void
   docs: {
     name: string
     short: string
@@ -37,7 +37,7 @@ export interface BashConfig {
 }
 
 export type PrintFunction = (s: string, md?: boolean) => void
-export type CommandFunction = (args: string[], options: string[]) => void
+export type CommandFunction = (args: string[], options?: string[]) => void
 export type ApplicationRegistry = Record<string, ApplicationDefinition>
 
 export interface StringEditResult {

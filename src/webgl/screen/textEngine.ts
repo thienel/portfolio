@@ -5,8 +5,8 @@ import { Assists } from '../types'
 import { Change } from '../../terminal'
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js'
 
-// const textColor = '#f99021'
-const textColor = '#808080'
+const textColor = '#f99021'
+// const textColor = '#7C746D'
 
 type FontInfo = {
   font: undefined | Font

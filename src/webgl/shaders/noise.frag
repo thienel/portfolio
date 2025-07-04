@@ -4,7 +4,7 @@
 #define LINE_STRENGTH 0.05
 #define LINE_OFFSET 2.0
 
-#define NOISE_STRENGTH 0.2
+#define NOISE_STRENGTH 0.1
 
 uniform sampler2D uDiffuse;
 uniform float uTime;
@@ -38,5 +38,5 @@ void main()
             float r = rand(vUv*uTime);
 
             vec4 p = progress();
-            gl_FragColor = color  +  (vec4(r,r,r,0) * (p.a + NOISE_STRENGTH)) + squareWave(vUv.y);            
+            gl_FragColor = color  +  (vec4(r,r,r,0) * (p.a + NOISE_STRENGTH)) + squareWave(vUv.y);
         }

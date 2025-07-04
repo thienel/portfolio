@@ -1,62 +1,57 @@
-import FileSystemBash from './fileSystemBash'
-import Applications from './applications'
+// import FileSystemBash from './fileSystemBash'
+// import Applications from './applications'
 
-export default function Bash(print: (s: string, md?: boolean) => void) {
-  const fileSystem = FileSystemBash()
-  const path = { p: fileSystem.goHome() }
+// export default function Bash(print: (s: string, md?: boolean) => void) {
+//   const fileSystem = FileSystemBash()
+//   const path = { p: fileSystem.goHome() }
 
-  const getApp = Applications(print, path)
+//   const getApp = Applications(print, path)
 
-  function splitArgs(a: string[]) {
-    const args: string[] = []
-    const options: string[] = []
+//   function splitArgs(a: string[]) {
+//     const args: string[] = []
 
-    a.forEach(v => {
-      if (v === '') return
+//     a.forEach(v => {
+//       if (v === '') return
 
-      if (v.charAt(0) === '-') {
-        options.push(v)
-        return
-      }
+//       args.push(v)
+//     })
 
-      args.push(v)
-    })
+//     return [args]
+//   }
 
-    return [args, options]
-  }
+//   function cmdNotFound(cmdName: string) {
+//     print(`\n${cmdName}:command not found`)
+//   }
 
-  function cmdNotFound(cmdName: string) {
-    print(`\n${cmdName}:command not found`)
-  }
+//   function prompt() {
+//     let out = ''
+//     for (let i = 0; i < path.p.length; i++) {
+//       out += path.p[i].name
+//       if (i !== 0 && i < path.p.length - 1) out += '/'
+//     }
+//     out = out.replace(/^\/home\/user/, '~')
+//     if (out !== '~') out += ' '
+//     print(`\nuser:${out}$`)
+//   }
 
-  function prompt() {
-    let out = ''
-    for (let i = 0; i < path.p.length; i++) {
-      out += path.p[i].name
-      if (i !== 0 && i < path.p.length - 1) out += '/'
-    }
-    out = out.replace(/^\/home\/user/, '~')
-    if (out !== '~') out += ' '
-    print(`\nuser:${out}$`)
-  }
+//   function input(cmd: string) {
+//     cmd = cmd.replace(/\s+/g, ' ')
+//     const cmdSplit = cmd.split(' ')
+//     const cmdName = cmdSplit[0]
+//     const cmdArgs: string[] = cmdSplit.slice(1)
+//     console.log('cmd', cmdName, cmdArgs)
 
-  function input(cmd: string) {
-    cmd = cmd.replace(/\s+/g, ' ')
-    const cmdSplit = cmd.split(' ')
-    const cmdName = cmdSplit[0]
-    const cmdArgs: string[] = cmdSplit.slice(1)
-    console.log('cmd', cmdName, cmdArgs)
+//     if (cmd) {
+//       const app = getApp(cmdName)
+//       console.log('app', app)
+//       if (app) {
+//         const [args, options] = splitArgs(cmdArgs)
+//         app(args, options)
+//       } else cmdNotFound(cmdName)
+//     }
 
-    if (cmd) {
-      const app = getApp(cmdName)
-      if (app) {
-        const [args, options] = splitArgs(cmdArgs)
-        app(args, options)
-      } else cmdNotFound(cmdName)
-    }
+//     prompt()
+//   }
 
-    prompt()
-  }
-
-  return { input }
-}
+//   return { input }
+// }
