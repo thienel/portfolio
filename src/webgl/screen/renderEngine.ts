@@ -15,7 +15,7 @@ export default function ScreenRenderEngine(
 ) {
   const resolution = 512 + 64
 
-  const cameraRTT = new THREE.OrthographicCamera(-0.1, 1.496, 0.1, -1.1, 1, 3)
+  const cameraRTT = new THREE.OrthographicCamera(-0.3, 1.7, 0, -0.95, 1, 3)
   sceneRTT.add(cameraRTT)
   cameraRTT.position.set(0, 0, 1)
 
@@ -84,7 +84,7 @@ export default function ScreenRenderEngine(
   shaderToScreen.outputTexture.texture.colorSpace = THREE.SRGBColorSpace
   const material = new THREE.MeshStandardMaterial()
   material.metalness = -0.25
-  material.roughness = 0.125
+  material.roughness = 0.5
   material.envMap = environmentMapTexture
   material.envMapIntensity = 0.25
   material.map = shaderToScreen.outputTexture.texture

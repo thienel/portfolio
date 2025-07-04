@@ -5,8 +5,8 @@ import { Assists } from '../types'
 import { Change } from '../../terminal'
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js'
 
-const textColor = '#f99021'
-// const textColor = '#7C746D'
+// const textColor = '#f99021'
+const textColor = '#F2F2F2'
 
 type FontInfo = {
   font: undefined | Font
@@ -18,7 +18,7 @@ type FontInfo = {
 }
 
 const h1Font: FontInfo = (function () {
-  const size = 0.05
+  const size = 0.03
   const height = size
   const width = size
   const leading = height * 2
@@ -27,7 +27,7 @@ const h1Font: FontInfo = (function () {
 })()
 
 const h2Font: FontInfo = (function () {
-  const size = 0.04
+  const size = 0.025
   const height = size
   const width = size * 0.8
   const leading = height * 2
@@ -36,7 +36,7 @@ const h2Font: FontInfo = (function () {
 })()
 
 const h3Font: FontInfo = (function () {
-  const size = 0.03
+  const size = 0.025
   const height = size
   const width = size * 0.8
   const leading = height * 2.5
@@ -47,7 +47,7 @@ const h3Font: FontInfo = (function () {
 declare const screenWidth: number
 
 const paragraphFont: FontInfo = (function () {
-  const size = 0.0275
+  const size = 0.02
   const height = size
   const width = size * 0.8
   const leading = height * 2.5
@@ -131,6 +131,9 @@ export default function ScreenTextEngine(assists: Assists, sceneRTT: THREE.Scene
 
     const charWidth = h2Font.width + h2Font.tracking
     const charsPerLine = Math.floor(screenWidth / charWidth)
+    console.log('screenWidth', screenWidth)
+    console.log('charWidth', charWidth)
+    console.log('charsPerLine', charsPerLine)
 
     if (pos !== undefined) {
       charPos.x = charNextLoc.x + charWidth * ((pos + terminalPromptOffset) % charsPerLine)
@@ -213,7 +216,7 @@ export default function ScreenTextEngine(assists: Assists, sceneRTT: THREE.Scene
     })
 
     if (props.updateCharNextLoc) textGeometry.translate(x, -props.font.height - y, -0.001)
-    else textGeometry.translate(0, -props.font.height, -0.001)
+    else textGeometry.translate(x, -props.font.height, -0.001)
 
     if (props.highlight) {
       const background = new THREE.PlaneGeometry(
