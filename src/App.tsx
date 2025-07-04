@@ -11,7 +11,8 @@ function App() {
   }, []);
 
   return (
-    <>
+    <div className="main-container">
+
       {
         !isWelcomeComplete &&
       <Welcome onComplete={() => setIsWelcomeComplete(true)} />
@@ -20,7 +21,7 @@ function App() {
       <canvas className="webgl"></canvas>
 
       <input type="text" id="textarea" readOnly />
-    </>
+    </div>
   );
 }
 

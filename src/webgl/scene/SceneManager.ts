@@ -32,7 +32,7 @@ export class SceneManager {
 
   private createCamera(): THREE.PerspectiveCamera {
     const camera = new THREE.PerspectiveCamera(50, this.sizes.width / this.sizes.height, 0.1, 100)
-    camera.position.set(0, 0, -2.5)
+    camera.position.set(0, 0, -3.25)
     camera.rotation.set(-Math.PI, 0, Math.PI)
     this.scene.add(camera)
     return camera
@@ -100,7 +100,7 @@ export class SceneManager {
     this.camera.position.z = clampedMap(
       scroll,
       [0, 1],
-      [-2.5 - this.sizes.portraitOffset, -10 - this.sizes.portraitOffset],
+      [-3.25 - this.sizes.portraitOffset, -10 - this.sizes.portraitOffset],
     )
 
     // Apply parallax effect

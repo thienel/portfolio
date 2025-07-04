@@ -191,7 +191,7 @@ export class AssetLoader {
       const gltfLoader = new GLTFLoader(this.manager)
 
       gltfLoader.load(
-        '/models/Commodore710_33.5.glb',
+        '/models/Screen.glb',
         gltf => {
           try {
             this.assists.screenMesh = this.getMeshByName(gltf, 'Screen')

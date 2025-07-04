@@ -92,7 +92,7 @@ function loadAssists(callback: (assists: Assists) => void) {
 
   // Mesh
   const gltfLoader = new GLTFLoader(manager)
-  gltfLoader.load('/models/Commodore710_33.5.glb', gltf => {
+  gltfLoader.load('/models/Screen.glb', gltf => {
     const getMeshByName = (name: string): THREE.Mesh => {
       const obj = gltf.scene.children.find(m => m.name === name)
       if (!obj) throw new Error(`Mesh "${name}" not found`)
