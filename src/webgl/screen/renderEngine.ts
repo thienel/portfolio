@@ -39,7 +39,7 @@ export default function ScreenRenderEngine(
     fragmentShader: noiseFragmentShader,
   })
 
-  const bloomPass = new UnrealBloomPass(new THREE.Vector2(128, 128), 0.5, 0.5, 0)
+  const bloomPass = new UnrealBloomPass(new THREE.Vector2(128, 128), 0.3, 0.3, 0.3)
   composer.addPass(bloomPass)
 
   const lag = new Lag(composer.readBuffer, resolution * 1.33, resolution)
@@ -86,7 +86,7 @@ export default function ScreenRenderEngine(
   material.metalness = -0.25
   material.roughness = 0.5
   material.envMap = environmentMapTexture
-  material.envMapIntensity = 0.25
+  material.envMapIntensity = 0.15
   material.map = shaderToScreen.outputTexture.texture
 
   return { tick, material }

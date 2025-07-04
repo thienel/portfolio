@@ -1,5 +1,5 @@
-#define LAG 0.8
-#define LAG_INVERSE 0.2
+#define LAG 0.75
+#define LAG_INVERSE 0.35
 
 uniform sampler2D uDiffuse;
 uniform sampler2D uLagTex;
@@ -10,5 +10,5 @@ void main()
     vec4 Diffuse = texture2D(uDiffuse, vUv);
     vec4 LagTex = texture2D(uLagTex, vUv);
 
-    gl_FragColor = (Diffuse * LAG_INVERSE) + (LagTex * LAG);            
+    gl_FragColor = (Diffuse * LAG_INVERSE) + (LagTex * LAG);
 }
