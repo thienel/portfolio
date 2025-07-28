@@ -1,6 +1,8 @@
 // src/styles/variables.scss
 @import url('https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+
 @font-face {
   font-family: 'Public Pixel';
   src: url('/src/assets/fonts/PublicPixel.ttf') format('truetype');
@@ -11,9 +13,14 @@
 
 $pixel-font: 'Public Pixel', monospace;
 $gothic-font: 'Special Gothic Expanded One', sans-serif;
+$jetbrains-font: 'JetBrains Mono', monospace;
 $black: #0D0D0D;
+$black-50: rgba(13, 13, 13, 0.5);
 $white: #F2F2F2;
+$grey: #BFBFBF;
 $primary: #868381;
+$width-content: 750px;
+$header-height: 220px;
 
 
 
