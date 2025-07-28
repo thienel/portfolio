@@ -3,6 +3,15 @@
 
 
 # Contact
-## Reach out on*LinkedIn*
+## *LinkedIn*
 
-https://www.linkedin.com/in/edwardhinrichsen/
+https://www.linkedin.com/in/lehungthien
+
+## *Github*
+
+https://github.com/thienel
+
+## *Gmail*
+
+lethien.dev@gmail.com
+

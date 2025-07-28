@@ -4,8 +4,10 @@
 
 # Hi there
 
-My name is Ed Hinrichsen, I’m an award-winning web dev / digital designer and full stack software engineer. I have a passion for all things technology and design, from software engineering & machine learning to UI/UX & 3D graphics.
+My name is Le Hung Thien, and I’m currently a third-year student at FPT University. I'm a backend developer with a strong focus on Golang. In addition, I have hands-on experience with C# and ReactJS.
 
-In addition to my love of technology and design, I am also interested in education, history, economics and politics.
+I’m passionate about building things that are simple on the outside, but powerful under the hood — just like Golang, which is why it’s my language of choice.
 
-Type "cd ~/projects" then "ls" to see details of some of the projects I have developed over my fifteen plus years of coding experience.
+Fun fact: I used to be a city-level athlete in 10m air pistol shooting, where I earned several notable achievements — a journey that taught me discipline, focus, and patience.
+
+If you’d like to explore more about my projects (including this website), type "cd ~/projects" then "ls" to see details. Enjoy!
