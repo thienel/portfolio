@@ -1,0 +1,15 @@
+.wrapper {
+  position: sticky;
+  top: 0px;
+  width: $width-content;
+  height: 68px ;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 50px;
+  align-items: center;
+  z-index: 1000;
+  background-color: $black-50;
+  backdrop-filter: blur(2px);
+}
+
