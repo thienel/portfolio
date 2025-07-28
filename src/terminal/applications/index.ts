@@ -10,6 +10,7 @@ import ls from './ls'
 import cat from './cat'
 import clear from './clear'
 import help from './help'
+import exit from './exit'
 
 export function registerApplications(
   registerApplication: (name: string, definition: ApplicationDefinition) => void,
@@ -23,4 +24,5 @@ export function registerApplications(
   registerApplication('cat', cat(print, path, rootNode))
   registerApplication('clear', clear(print))
   registerApplication('help', help(print, getApplications))
+  registerApplication('exit', exit())
 }
