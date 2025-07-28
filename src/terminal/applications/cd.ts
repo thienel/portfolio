@@ -5,7 +5,7 @@ export default function cd(print: PrintFunction, path: FileSystemPath, root: Fil
   const docs = {
     name: 'cd',
     short: 'change directory',
-    description: 'Change to a subdirectory or go back to root.',
+    description: 'Change to a directory (cd dir), parent (cd ..), or root (cd ~)',
   }
 
   const app = (args: string[]) => {

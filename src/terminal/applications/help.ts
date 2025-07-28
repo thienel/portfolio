@@ -8,7 +8,7 @@ export default function help(print: PrintFunction, getApplications: () => Applic
   }
 
   const app = () => {
-    let helpText = '\n\n## Available Commands\n\n'
+    let helpText = '\n\n## Available Commands\n\nUse ↑ and ↓ to scroll through the list.\n\n'
 
     const applications = getApplications()
     Object.entries(applications).forEach(([name, definition]) => {
