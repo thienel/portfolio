@@ -142,6 +142,7 @@ export class TerminalController {
       this.textarea.focus()
 
       if (event.key.length === 1) {
+        event.preventDefault() // Prevent the default key input to avoid double typing
         this.textarea.value =
           this.textarea.value.slice(0, this.lastSelection) +
           event.key +
