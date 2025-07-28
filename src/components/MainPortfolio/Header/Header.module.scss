@@ -1,0 +1,32 @@
+.wrapper{
+    width: 100%;
+    height: $header-height;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.title{
+    width: 55%;
+    font-weight: 400;
+    h1{
+        font-size: 32px;
+        margin: 20px 0;
+    }
+    p {
+        font-size: 18px;
+        margin: 12px 0;
+        color: $grey;
+    }
+}
+
+.logo {
+    width: 200px;
+    height: 200px;
+    img{
+
+    object-fit: cover;
+    border-radius: 50%;
+    }
+}
