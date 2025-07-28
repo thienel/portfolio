@@ -49,6 +49,14 @@ export class TerminalController {
     const fsTree = generateFS(files) as FileSystemPath
     this.rootNode = { name: 'root', type: 'directory', children: fsTree.p } as FileSystemNode
 
+    // Initialize path to /home/user directory
+    const homeDir = this.rootNode.children?.find(c => c.name === 'home' && c.type === 'directory')
+    const userDir = homeDir?.children?.find(c => c.name === 'user' && c.type === 'directory')
+
+    if (homeDir && userDir) {
+      fsTree.p = [homeDir, userDir]
+    }
+
     this.bash = new BashEmulator(
       (text: string, isMarkdown: boolean = false) => {
         this.printToScreen(text, isMarkdown)
