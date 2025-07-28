@@ -26,29 +26,12 @@ export class CommandProcessor {
   }
 
   private setupBuiltinCommands(): void {
-    this.registerApplication('help', {
-      app: () => this.showHelp(),
-      docs: {
-        name: 'help',
-        short: 'Display available commands',
-        description: 'Shows a list of all available commands and their descriptions',
-      },
-    })
-
-    this.registerApplication('clear', {
-      app: () => this.clearScreen(),
-      docs: {
-        name: 'clear',
-        short: 'Clear the terminal screen',
-        description: 'Clears all content from the terminal screen',
-      },
-    })
-
     registerApplications(
       (name, definition) => this.registerApplication(name, definition),
       this.printFunction,
       this.fileSystemPath,
       this.rootNode,
+      () => this.applications,
     )
   }
 
@@ -79,24 +62,6 @@ export class CommandProcessor {
     }
 
     this.showPrompt()
-  }
-
-  private showHelp(): void {
-    let helpText = '\n\n## Available Commands\n\n'
-
-    Object.entries(this.applications).forEach(([name, definition]) => {
-      helpText += `**${name}** - ${definition.docs.short}\n`
-      if (definition.docs.description) {
-        helpText += `  ${definition.docs.description}\n`
-      }
-      helpText += '\n'
-    })
-
-    this.printFunction(helpText, true)
-  }
-
-  private clearScreen(): void {
-    this.printFunction('\n'.repeat(20))
   }
 
   private showPrompt(): void {
