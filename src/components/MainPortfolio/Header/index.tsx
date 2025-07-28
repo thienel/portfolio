@@ -11,7 +11,7 @@ function Header() {
                 <p>Welcome to my portfolio.<br />Hope you will find it interesting!</p>
             </div>
             <div className={cx('logo')}>
-                <img src="/src/assets/images/avatar.png" alt="Avatar" />
+                <img src="/images/avatar.png" alt="Avatar" />
             </div>
         </div>
      );
