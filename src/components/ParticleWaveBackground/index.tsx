@@ -1,15 +1,15 @@
 'use client'
 
-import * as THREE from 'three';
-import React, { useRef, useEffect, useCallback } from 'react';
-import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
-import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
-import { UnrealBloomPass } from 'three/examples/jsm/Addons.js';
-import { OutputPass } from 'three/examples/jsm/Addons.js';
-import styles from './ParticleWaveBackground.module.scss';
-import classNames from 'classnames/bind';
+import * as THREE from 'three'
+import React, { useRef, useEffect, useCallback } from 'react'
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js'
+import { UnrealBloomPass } from 'three/examples/jsm/Addons.js'
+import { OutputPass } from 'three/examples/jsm/Addons.js'
+import styles from './ParticleWaveBackground.module.scss'
+import classNames from 'classnames/bind'
 
-const cx = classNames.bind(styles);
+const cx = classNames.bind(styles)
 
 // Enhanced vertex shader with noise and organic movement
 const ENHANCED_VERTEX_SHADER = `
@@ -121,7 +121,7 @@ void main() {
 
   gl_Position = projectionMatrix * mvPosition;
 }
-`;
+`
 
 // Enhanced fragment shader with glow effects
 const ENHANCED_FRAGMENT_SHADER = `
@@ -151,45 +151,45 @@ void main() {
 
   gl_FragColor = vec4(color, alpha);
 }
-`;
+`
 
 export interface ParticleWaveBackgroundProps {
   /** Canvas CSS class name */
-  className?: string;
+  className?: string
   /** Number of particles (default: auto-detected based on device) */
-  particleCount?: number;
+  particleCount?: number
   /** Animation speed multiplier (default: 1.0) */
-  animationSpeed?: number;
+  animationSpeed?: number
   /** Camera position [x, y, z] (default: auto-detected based on device) */
-  cameraPosition?: [number, number, number];
+  cameraPosition?: [number, number, number]
   /** Camera rotation [x, y, z] (default: auto-detected based on device) */
-  cameraRotation?: [number, number, number];
+  cameraRotation?: [number, number, number]
   /** Custom vertex shader (optional) */
-  vertexShader?: string;
+  vertexShader?: string
   /** Custom fragment shader (optional) */
-  fragmentShader?: string;
+  fragmentShader?: string
   /** Bloom intensity (default: 0.25) */
-  bloomIntensity?: number;
+  bloomIntensity?: number
   /** Bloom threshold (default: 0.5) */
-  bloomThreshold?: number;
+  bloomThreshold?: number
   /** Bloom radius (default: 0.1) */
-  bloomRadius?: number;
+  bloomRadius?: number
   /** Animation frame rate limit (default: 45 FPS) */
-  frameRate?: number;
+  frameRate?: number
   /** Callback when component finishes loading */
-  onLoad?: (isLoading: boolean) => void;
+  onLoad?: (isLoading: boolean) => void
   /** Enable performance monitoring */
-  enableStats?: boolean;
+  enableStats?: boolean
   /** Background color (default: '#111111') */
-  backgroundColor?: string;
+  backgroundColor?: string
 }
 
 interface WaveUniforms {
-  [uniform: string]: THREE.IUniform<unknown>;
-  uResolution: { value: THREE.Vector2 };
-  uTime: { value: number };
-  uCameraPos: { value: THREE.Vector3 };
-  uLightPos: { value: THREE.Vector3 };
+  [uniform: string]: THREE.IUniform<unknown>
+  uResolution: { value: THREE.Vector2 }
+  uTime: { value: number }
+  uCameraPos: { value: THREE.Vector3 }
+  uLightPos: { value: THREE.Vector3 }
 }
 
 const ParticleWaveBackground: React.FC<ParticleWaveBackgroundProps> = ({
@@ -205,48 +205,55 @@ const ParticleWaveBackground: React.FC<ParticleWaveBackgroundProps> = ({
   frameRate = 60,
   onLoad,
   enableStats = false,
-  backgroundColor = '#0D0D0D'
+  backgroundColor = '#0D0D0D',
 }) => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null)
 
   // Increased particle density for richer visual
   const getDeviceSettings = useCallback(() => {
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent,
+    )
 
     if (isMobile) {
       return {
         count: particleCount || 8000, // Much denser on mobile
-        rotation: cameraRotation || [1, 0, 6.15] as [number, number, number],
-        position: cameraPosition || [3.8, -0.17, 0.9] as [number, number, number],
-      };
+        rotation: cameraRotation || ([1, 0, 6.15] as [number, number, number]),
+        position: cameraPosition || ([3.8, -0.17, 0.9] as [number, number, number]),
+      }
     } else {
       return {
         count: particleCount || 35000, // Very dense particle field for desktop
-        rotation: cameraRotation || [1.35, 5.5, 0.9] as [number, number, number],
-        position: cameraPosition || [1.5, -0.55, 2.15] as [number, number, number],
-      };
+        rotation: cameraRotation || ([1.35, 5.5, 0.9] as [number, number, number]),
+        position: cameraPosition || ([1.5, -0.55, 2.15] as [number, number, number]),
+      }
     }
-  }, [particleCount, cameraPosition, cameraRotation]);
+  }, [particleCount, cameraPosition, cameraRotation])
 
   useEffect(() => {
-    if (!canvasRef.current) return;
+    if (!canvasRef.current) return
 
-    const canvas = canvasRef.current;
-    const settings = getDeviceSettings();
+    const canvas = canvasRef.current
+    const settings = getDeviceSettings()
 
     // Scene setup
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+    const scene = new THREE.Scene()
+    const camera = new THREE.PerspectiveCamera(
+      75,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      1000,
+    )
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true })
 
-    scene.background = new THREE.Color(backgroundColor);
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    scene.background = new THREE.Color(backgroundColor)
+    renderer.setSize(window.innerWidth, window.innerHeight)
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+    renderer.outputColorSpace = THREE.SRGBColorSpace
 
     // Camera positioning
-    camera.position.set(...settings.position);
-    camera.rotation.set(...settings.rotation);
+    camera.position.set(...settings.position)
+    camera.rotation.set(...settings.rotation)
 
     // Create uniforms matching your original implementation (local variables)
     const uniforms: WaveUniforms = {
@@ -254,7 +261,7 @@ const ParticleWaveBackground: React.FC<ParticleWaveBackgroundProps> = ({
       uTime: { value: 0.0 },
       uCameraPos: { value: new THREE.Vector3() },
       uLightPos: { value: new THREE.Vector3(-5, 5, 5).normalize() },
-    };
+    }
 
     // Create material with enhanced shaders
     const waveMat = new THREE.ShaderMaterial({
@@ -265,134 +272,141 @@ const ParticleWaveBackground: React.FC<ParticleWaveBackgroundProps> = ({
       transparent: true,
       depthWrite: true,
       depthTest: true,
-    });
+    })
 
     // Create denser particle grid with wave-like distribution
-    const pos = new Float32Array(settings.count * 3);
-    const gridSize = Math.sqrt(settings.count);
-    const spacing = 0.08; // Reduced spacing for denser particles
-    const centerOffset = (gridSize * spacing) / 2;
+    const pos = new Float32Array(settings.count * 3)
+    const gridSize = Math.sqrt(settings.count)
+    const spacing = 0.08 // Reduced spacing for denser particles
+    const centerOffset = (gridSize * spacing) / 2
 
     for (let i = 0; i < settings.count; i++) {
-      const i3 = i * 3;
-      const x = (i % gridSize) * spacing - centerOffset;
-      const y = Math.floor(i / gridSize) * spacing - centerOffset;
+      const i3 = i * 3
+      const x = (i % gridSize) * spacing - centerOffset
+      const y = Math.floor(i / gridSize) * spacing - centerOffset
 
       // Add some randomness for organic feel but keep density
-      const randomOffset = 0.02;
-      const offsetX = (Math.random() - 0.5) * randomOffset;
-      const offsetY = (Math.random() - 0.5) * randomOffset;
+      const randomOffset = 0.02
+      const offsetX = (Math.random() - 0.5) * randomOffset
+      const offsetY = (Math.random() - 0.5) * randomOffset
 
-      pos[i3 + 0] = x + offsetX;
-      pos[i3 + 1] = y + offsetY;
-      pos[i3 + 2] = (Math.random() - 0.5) * 1.5; // More Z variation for wave depth
+      pos[i3 + 0] = x + offsetX
+      pos[i3 + 1] = y + offsetY
+      pos[i3 + 2] = (Math.random() - 0.5) * 1.5 // More Z variation for wave depth
     }
 
-    const waveGeo = new THREE.BufferGeometry();
-    waveGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-    const wave = new THREE.Points(waveGeo, waveMat);
-    scene.add(wave);
+    const waveGeo = new THREE.BufferGeometry()
+    waveGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3))
+    const wave = new THREE.Points(waveGeo, waveMat)
+    scene.add(wave)
 
     // Post-processing setup
-    const renderScene = new RenderPass(scene, camera);
+    const renderScene = new RenderPass(scene, camera)
     const bloomPass = new UnrealBloomPass(
       new THREE.Vector2(window.innerWidth, window.innerHeight),
       bloomIntensity,
       bloomRadius,
-      bloomThreshold
-    );
-    const outputPass = new OutputPass();
+      bloomThreshold,
+    )
+    const outputPass = new OutputPass()
 
-    const composer = new EffectComposer(renderer);
-    composer.addPass(renderScene);
-    composer.addPass(bloomPass);
-    composer.addPass(outputPass);
+    const composer = new EffectComposer(renderer)
+    composer.addPass(renderScene)
+    composer.addPass(bloomPass)
+    composer.addPass(outputPass)
 
-    composer.setSize(window.innerWidth, window.innerHeight);
+    composer.setSize(window.innerWidth, window.innerHeight)
 
     // Stats (optional) - Fixed import
-    let stats: { begin: () => void; end: () => void; showPanel: (panel: number) => void; dom: HTMLElement } | null = null;
+    let stats: {
+      begin: () => void
+      end: () => void
+      showPanel: (panel: number) => void
+      dom: HTMLElement
+    } | null = null
     if (enableStats && typeof window !== 'undefined') {
       try {
-        import('stats.js').then((Stats) => {
-          stats = new Stats.default();
-          stats.showPanel(0);
-          document.body.appendChild(stats.dom);
-        }).catch(() => {
-          console.warn('Stats.js not available');
-        });
+        import('stats.js')
+          .then(Stats => {
+            stats = new Stats.default()
+            stats.showPanel(0)
+            document.body.appendChild(stats.dom)
+          })
+          .catch(() => {
+            console.warn('Stats.js not available')
+          })
       } catch {
-        console.warn('Stats.js not available');
+        console.warn('Stats.js not available')
       }
     }
 
     // Handle window resize
     const handleResize = () => {
-      composer.reset();
-      renderer.resetState();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      composer.setSize(window.innerWidth, window.innerHeight);
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      uniforms.uResolution.value.set(window.innerWidth, window.innerHeight);
-    };
+      composer.reset()
+      renderer.resetState()
+      renderer.setSize(window.innerWidth, window.innerHeight)
+      composer.setSize(window.innerWidth, window.innerHeight)
+      camera.aspect = window.innerWidth / window.innerHeight
+      camera.updateProjectionMatrix()
+      uniforms.uResolution.value.set(window.innerWidth, window.innerHeight)
+    }
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', handleResize)
 
     // Fixed animation loop - no more setTimeout + requestAnimationFrame
-    let animationId: number;
-    let lastTime = 0;
-    const frameInterval = 1000 / frameRate;
+    let animationId: number
+    let lastTime = 0
+    const frameInterval = 1000 / frameRate
 
     const animate = (currentTime: number) => {
-      if (stats) stats.begin();
+      if (stats) stats.begin()
 
       if (currentTime - lastTime >= frameInterval) {
-        composer.render();
-        uniforms.uTime.value += 0.005 * animationSpeed;
-        lastTime = currentTime;
+        composer.render()
+        uniforms.uTime.value += 0.005 * animationSpeed
+        lastTime = currentTime
       }
 
-      if (stats) stats.end();
-      animationId = requestAnimationFrame(animate);
-    };
+      if (stats) stats.end()
+      animationId = requestAnimationFrame(animate)
+    }
 
     // Start animation
-    animationId = requestAnimationFrame(animate);
+    animationId = requestAnimationFrame(animate)
 
     // Notify parent component that loading is complete
     if (onLoad) {
-      onLoad(false);
+      onLoad(false)
     }
 
     // Cleanup function
     return () => {
       if (animationId) {
-        cancelAnimationFrame(animationId);
+        cancelAnimationFrame(animationId)
       }
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('resize', handleResize)
 
       if (stats && stats.dom && stats.dom.parentNode) {
-        stats.dom.parentNode.removeChild(stats.dom);
+        stats.dom.parentNode.removeChild(stats.dom)
       }
 
       // Proper cleanup order
-      composer.dispose();
-      renderer.dispose();
+      composer.dispose()
+      renderer.dispose()
 
       if (wave) {
-        scene.remove(wave);
-        if (wave.geometry) wave.geometry.dispose();
+        scene.remove(wave)
+        if (wave.geometry) wave.geometry.dispose()
         if (Array.isArray(wave.material)) {
-          wave.material.forEach((material: THREE.Material) => material.dispose());
+          wave.material.forEach((material: THREE.Material) => material.dispose())
         } else if (wave.material) {
-          wave.material.dispose();
+          wave.material.dispose()
         }
       }
 
-      waveGeo.dispose();
-      waveMat.dispose();
-    };
+      waveGeo.dispose()
+      waveMat.dispose()
+    }
   }, [
     getDeviceSettings,
     vertexShader,
@@ -404,10 +418,10 @@ const ParticleWaveBackground: React.FC<ParticleWaveBackgroundProps> = ({
     frameRate,
     onLoad,
     enableStats,
-    backgroundColor
-  ]);
+    backgroundColor,
+  ])
 
-  return <canvas ref={canvasRef} className={cx('background')} />;
-};
+  return <canvas ref={canvasRef} className={cx('background')} />
+}
 
-export default React.memo(ParticleWaveBackground);
+export default React.memo(ParticleWaveBackground)

@@ -7,12 +7,12 @@
   user-select: none;
 }
 
-html{
-    scroll-behavior: smooth;
+html {
+  scroll-behavior: smooth;
 }
 
-button{
-    cursor: pointer;
+button {
+  cursor: pointer;
 }
 
 body {
@@ -51,8 +51,12 @@ select {
   background: none;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-size: inherit;
   font-weight: normal;
 }
-
