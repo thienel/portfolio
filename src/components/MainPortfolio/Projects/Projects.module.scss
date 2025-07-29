@@ -1,0 +1,33 @@
+.wrapper {
+  width: $width-content;
+  margin-top: 32px;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: $white;
+  margin-bottom: 24px;
+  text-align: center;
+  font-family: $jetbrains-font;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, #d8b4f8, #c084fc);
+  }
+}
+
+.projects-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 800px;
+  margin: 0 auto;
+}

@@ -3,6 +3,7 @@ import styles from './MainPortfolio.module.scss'
 import classNames from 'classnames/bind'
 import NavBar from './NavBar'
 import ParticleWaveBackground from '@components/ParticleWaveBackground'
+import Projects from './Projects'
 
 const cx = classNames.bind(styles)
 
@@ -23,9 +24,10 @@ function MainPortfolio() {
         </p>
         <p>
           If you’re here, maybe by chance or interest, feel free to check out my resume and explore
-          the projects I’ve built.{' '}
+          the projects I’ve built.
         </p>
       </div>
+      <Projects />
     </div>
   )
 }
