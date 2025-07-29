@@ -1,10 +1,11 @@
 .wrapper {
-  width: 100%;
-  height: $header-height;
+  width: $width-content;
+  height: fit-content;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  margin-top: 50px;
 }
 
 .title {
