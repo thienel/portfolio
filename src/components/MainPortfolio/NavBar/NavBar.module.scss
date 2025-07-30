@@ -1,64 +1,27 @@
 .wrapper {
-  margin-top: 50px;
-  margin-bottom: 10px;
-  position: sticky;
-  top: 0px;
-  width: $width-content;
-  height: 100px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 50px;
+  position: fixed;
+  top: 0;
+  width: 80%;
+  height: 120px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
   z-index: 1000;
-  background-color: $black-50;
-  backdrop-filter: blur(3px);
+  background-color: transparent;
+  font-size: 15px;
+  color: $white;
 }
 
-.nav-item {
-  color: rgba(255, 255, 255, 0.8);
-  cursor: pointer;
-  padding: 10px 15px;
-  border-radius: 6px;
-  transition: all 0.3s ease;
-  font-weight: 600;
-
-  &:hover {
-    color: white;
-    background-color: rgba(255, 255, 255, 0.1);
-    transform: translateY(-2px);
-  }
-
-  &:active {
-    transform: translateY(0);
-  }
+.logo {
+  justify-self: start;
 }
 
-@media (max-width: 768px) {
-  .wrapper {
-    width: 95%;
-    gap: 20px;
-    padding: 0 10px;
-    flex-wrap: wrap;
-    height: auto;
-    min-height: 68px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
-
-  .nav-item {
-    padding: 8px 12px;
-    font-size: 0.9rem;
-  }
+.socials {
+  justify-self: center;
+  display: flex;
+  gap: 50px;
 }
 
-@media (max-width: 480px) {
-  .wrapper {
-    gap: 15px;
-  }
-
-  .nav-item {
-    padding: 6px 10px;
-    font-size: 0.85rem;
-  }
+.email {
+  justify-self: end;
 }
