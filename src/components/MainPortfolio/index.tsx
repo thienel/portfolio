@@ -3,10 +3,9 @@ import styles from './MainPortfolio.module.scss'
 import classNames from 'classnames/bind'
 import NavBar from './NavBar'
 import ParticleWaveBackground from '@components/ParticleWaveBackground'
-import Projects from './Projects'
 import Certificates from './Certificates'
-import Contact from './Contact'
 import About from './About'
+import SelectedWorks from './SelectedWorks'
 
 const cx = classNames.bind(styles)
 
@@ -17,9 +16,8 @@ function MainPortfolio() {
       <Header />
       <NavBar />
       <About />
-      <Projects />
+      <SelectedWorks />
       <Certificates />
-      <Contact />
     </div>
   )
 }
