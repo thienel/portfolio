@@ -6,11 +6,105 @@
   width: 70%;
   min-height: 100vh;
   padding-right: 10%;
+}
 
-  p {
-    font-size: 30px;
-    font-weight: 400;
-    line-height: 50px;
-    margin: 12px 0;
+.content {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.intro {
+  font-size: 28px;
+  font-weight: 300;
+  line-height: 44px;
+  margin: 16px 0;
+  opacity: 0.9;
+  letter-spacing: -0.01em;
+  animation: slideInLeft 0.8s ease-out;
+  animation-delay: 0.2s;
+  animation-fill-mode: both;
+}
+
+.details {
+  font-size: 28px;
+  font-weight: 300;
+  line-height: 44px;
+  margin: 16px 0;
+  opacity: 0.9;
+  letter-spacing: -0.01em;
+  animation: slideInLeft 0.8s ease-out;
+  animation-delay: 0.4s;
+  animation-fill-mode: both;
+}
+
+.highlight {
+  font-weight: 400;
+  opacity: 1;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+    border-radius: 1px;
+  }
+}
+
+.closing {
+  opacity: 0.7;
+  font-style: italic;
+  font-size: 26px;
+}
+
+.resume-link {
+  text-decoration: none;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  opacity: 0.8;
+  font-weight: 400;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: currentColor;
+    transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  &:hover {
+    opacity: 1;
+    transform: translateX(3px);
+
+    &::after {
+      width: 100%;
+    }
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 0.9;
+    transform: translateX(0);
   }
 }

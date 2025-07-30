@@ -9,15 +9,30 @@
 
 .title {
   width: 55%;
-  font-weight: 400;
+  font-weight: 300;
+  animation: slideInLeft 0.8s ease-out;
+
   h1 {
-    font-size: 72px;
+    font-size: 68px;
     margin: 20px 0;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    opacity: 0.95;
+    animation: fadeInUp 1s ease-out;
+    animation-delay: 0.2s;
+    animation-fill-mode: both;
   }
+
   p {
-    font-size: 32px;
+    font-size: 28px;
     margin: 12px 0;
     color: $grey;
+    line-height: 38px;
+    opacity: 0.8;
+    font-weight: 300;
+    animation: fadeInUp 1s ease-out;
+    animation-delay: 0.4s;
+    animation-fill-mode: both;
   }
 }
 
@@ -25,8 +40,57 @@
   margin-left: 50px;
   width: 250px;
   height: 250px;
+  position: relative;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation: slideInRight 0.8s ease-out;
+  animation-delay: 0.6s;
+  animation-fill-mode: both;
+
+  &:hover {
+    transform: scale(1.03) rotate(2deg);
+  }
+
   img {
     object-fit: cover;
     border-radius: 50%;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+      box-shadow: 0 16px 64px rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 0.95;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }

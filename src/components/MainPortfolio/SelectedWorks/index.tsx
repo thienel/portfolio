@@ -141,24 +141,32 @@ function SelectedWorks() {
 
   return (
     <div className={cx('wrapper')} ref={sectionRef} id="selected-works">
-      {projectsData.map((project, index) => (
-        <div
-          key={project.title}
-          ref={el => {
-            projectRefs.current[index] = el
-          }}
-          className={cx('project')}
-        >
-          <Project
-            title={project.title}
-            type={project.type}
-            description={project.description}
-            year={project.year}
-            githubUrl={project.githubUrl}
-            imageUrl={project.imageUrl}
-          />
-        </div>
-      ))}
+      <div className={cx('section-header')}>
+        <p>
+          A curated collection of projects showcasing technical growth and problem-solving approach.
+        </p>
+      </div>
+
+      <div className={cx('projects-container')}>
+        {projectsData.map((project, index) => (
+          <div
+            key={project.title}
+            ref={el => {
+              projectRefs.current[index] = el
+            }}
+            className={cx('project')}
+          >
+            <Project
+              title={project.title}
+              type={project.type}
+              description={project.description}
+              year={project.year}
+              githubUrl={project.githubUrl}
+              imageUrl={project.imageUrl}
+            />
+          </div>
+        ))}
+      </div>
 
       {showTechStacks && <TechStacks techs={currentTechs} isAnimatingOut={isAnimatingOut} />}
     </div>

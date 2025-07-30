@@ -10,18 +10,62 @@
   background-color: transparent;
   font-size: 15px;
   color: $white;
+
+  a {
+    text-decoration: none;
+    transition: all 0.25s ease;
+    opacity: 0.8;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: currentColor;
+      transition: width 0.25s ease;
+    }
+
+    &:hover {
+      opacity: 1;
+      transform: translateY(-1px);
+
+      &::after {
+        width: 100%;
+      }
+    }
+  }
 }
 
 .logo {
   justify-self: start;
+
+  a {
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+  }
 }
 
 .socials {
   justify-self: center;
   display: flex;
-  gap: 50px;
+  gap: 40px;
+
+  a {
+    font-weight: 300;
+    font-size: 14px;
+  }
 }
 
 .email {
   justify-self: end;
+
+  a {
+    font-weight: 300;
+    font-size: 14px;
+    opacity: 0.7;
+  }
 }

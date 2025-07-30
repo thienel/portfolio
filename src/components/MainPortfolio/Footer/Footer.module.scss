@@ -1,0 +1,221 @@
+.wrapper {
+  width: 100%;
+  margin-top: 120px;
+  padding: 80px 0 40px 0;
+  position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.content {
+  width: 70%;
+  margin: 0 auto;
+  padding-right: 10%;
+}
+
+.main-section {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 60px;
+  margin-bottom: 60px;
+  animation: slideInLeft 0.8s ease-out;
+  animation-delay: 0.2s;
+  animation-fill-mode: both;
+}
+
+.brand {
+  h3 {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    opacity: 0.95;
+    letter-spacing: -0.01em;
+  }
+
+  p {
+    font-size: 16px;
+    font-weight: 300;
+    opacity: 0.7;
+    margin: 0;
+    font-style: italic;
+  }
+}
+
+.links-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.links-group {
+  h4 {
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 0.6;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      margin-bottom: 12px;
+      animation: slideInRight 0.6s ease-out;
+      animation-fill-mode: both;
+
+      &:nth-child(1) {
+        animation-delay: 0.4s;
+      }
+      &:nth-child(2) {
+        animation-delay: 0.5s;
+      }
+      &:nth-child(3) {
+        animation-delay: 0.6s;
+      }
+    }
+  }
+}
+
+.footer-link {
+  font-size: 15px;
+  font-weight: 300;
+  opacity: 0.7;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  display: inline-block;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: currentColor;
+    transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  &:hover {
+    opacity: 0.95;
+    transform: translateX(3px);
+
+    &::after {
+      width: 100%;
+    }
+  }
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1) 20%,
+    rgba(255, 255, 255, 0.1) 80%,
+    transparent
+  );
+  margin: 40px 0;
+  animation: expandWidth 1s ease-out;
+  animation-delay: 0.8s;
+  animation-fill-mode: both;
+}
+
+.bottom-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  animation: fadeInUp 0.6s ease-out;
+  animation-delay: 1s;
+  animation-fill-mode: both;
+
+  p {
+    font-size: 13px;
+    font-weight: 300;
+    opacity: 0.5;
+    margin: 0;
+  }
+}
+
+.copyright {
+  p {
+    font-style: italic;
+  }
+}
+
+.tech-stack {
+  p {
+    font-family: monospace;
+    letter-spacing: 0.02em;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 0.7;
+    transform: translateX(0);
+  }
+}
+
+@keyframes expandWidth {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .content {
+    width: 90%;
+    padding-right: 5%;
+  }
+
+  .main-section {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .links-section {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .bottom-section {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+}

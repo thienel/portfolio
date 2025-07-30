@@ -21,7 +21,7 @@ function Project({ title, type, description, year, githubUrl, imageUrl }: Projec
       </div>
 
       <div className={cx('body')}>
-        {imageUrl && <img src={imageUrl} alt={title + 'image'} className={cx('image')} />}
+        {imageUrl && <img src={imageUrl} alt={`${title} preview`} className={cx('image')} />}
         <div className={cx('body-item', 'event')}>
           <h2>Event</h2>
           <p>Personal Project</p>
@@ -35,7 +35,9 @@ function Project({ title, type, description, year, githubUrl, imageUrl }: Projec
           <p>{description}</p>
         </div>
         <div className={cx('github')}>
-          <a href={githubUrl}>Link</a>
+          <a href={githubUrl} className={cx('project-link')}>
+            View Project →
+          </a>
         </div>
       </div>
     </div>

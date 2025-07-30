@@ -6,6 +6,7 @@ import ParticleWaveBackground from '@components/ParticleWaveBackground'
 import Certificates from './Certificates'
 import About from './About'
 import SelectedWorks from './SelectedWorks'
+import Footer from './Footer'
 
 const cx = classNames.bind(styles)
 
@@ -18,6 +19,7 @@ function MainPortfolio() {
       <About />
       <SelectedWorks />
       <Certificates />
+      <Footer />
     </div>
   )
 }

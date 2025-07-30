@@ -9,13 +9,13 @@ function Header() {
       <div className={cx('title')}>
         <h1>Le Hung Thien</h1>
         <p>
-          Welcome to my portfolio.
+          Backend Developer & Problem Solver
           <br />
-          Hope you will find it interesting!
+          Welcome to my digital space.
         </p>
       </div>
       <div className={cx('logo')}>
-        <img src="/images/avatar.png" alt="Avatar" />
+        <img src="/images/avatar.png" alt="Le Hung Thien" />
       </div>
     </div>
   )
