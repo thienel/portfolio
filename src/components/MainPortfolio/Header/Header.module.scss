@@ -1,30 +1,30 @@
 .wrapper {
-  width: $width-content;
-  height: fit-content;
+  width: 80%;
+  min-height: 100vh;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-top: 50px;
 }
 
 .title {
   width: 55%;
   font-weight: 400;
   h1 {
-    font-size: 32px;
+    font-size: 72px;
     margin: 20px 0;
   }
   p {
-    font-size: 18px;
+    font-size: 32px;
     margin: 12px 0;
     color: $grey;
   }
 }
 
 .logo {
-  width: 200px;
-  height: 200px;
+  margin-left: 50px;
+  width: 250px;
+  height: 250px;
   img {
     object-fit: cover;
     border-radius: 50%;
