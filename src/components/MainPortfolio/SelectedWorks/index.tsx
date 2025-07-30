@@ -3,7 +3,7 @@ import styles from './SelectedWorks.module.scss'
 import TechStacks from './TechStacks'
 import Project from './Project'
 import { useEffect, useRef, useState } from 'react'
-import { useScrollTrigger } from '~/hooks/useScrollTrigger'
+import { useIntersectionObserver } from '~/hooks/useIntersectionObserver'
 
 const cx = classNames.bind(styles)
 
@@ -69,9 +69,9 @@ function SelectedWorks() {
   const projectRefs = useRef<(HTMLElement | null)[]>([])
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
 
-  const sectionRef = useScrollTrigger<HTMLDivElement>({
-    start: 'top 80%',
-    end: 'bottom 20%',
+  const { elementRef: sectionRef } = useIntersectionObserver<HTMLDivElement>({
+    threshold: 0.1,
+    rootMargin: '0px 0px -20% 0px',
     onEnter: () => {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current)
