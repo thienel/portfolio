@@ -3,6 +3,7 @@ import styles from './SelectedWorks.module.scss'
 import TechStacks from './TechStacks'
 import Project from './Project'
 import { useEffect, useRef, useState } from 'react'
+import { useScrollTrigger } from '~/hooks/useScrollTrigger'
 
 const cx = classNames.bind(styles)
 
@@ -63,7 +64,53 @@ const projectsData = [
 
 function SelectedWorks() {
   const [currentTechs, setCurrentTechs] = useState<string[]>([])
+  const [showTechStacks, setShowTechStacks] = useState<boolean>(false)
+  const [isAnimatingOut, setIsAnimatingOut] = useState<boolean>(false)
   const projectRefs = useRef<(HTMLElement | null)[]>([])
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+
+  const sectionRef = useScrollTrigger<HTMLDivElement>({
+    start: 'top 80%',
+    end: 'bottom 20%',
+    onEnter: () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+        timeoutRef.current = null
+      }
+      setIsAnimatingOut(false)
+      setShowTechStacks(true)
+    },
+    onLeave: () => {
+      setIsAnimatingOut(true)
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+      }
+      timeoutRef.current = setTimeout(() => {
+        setShowTechStacks(false)
+        setIsAnimatingOut(false)
+        timeoutRef.current = null
+      }, 300)
+    },
+    onEnterBack: () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+        timeoutRef.current = null
+      }
+      setIsAnimatingOut(false)
+      setShowTechStacks(true)
+    },
+    onLeaveBack: () => {
+      setIsAnimatingOut(true)
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+      }
+      timeoutRef.current = setTimeout(() => {
+        setShowTechStacks(false)
+        setIsAnimatingOut(false)
+        timeoutRef.current = null
+      }, 300)
+    },
+  })
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -84,11 +131,16 @@ function SelectedWorks() {
       if (ref) observer.observe(ref)
     })
 
-    return () => observer.disconnect()
+    return () => {
+      observer.disconnect()
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+      }
+    }
   }, [])
 
   return (
-    <div className={cx('wrapper')}>
+    <div className={cx('wrapper')} ref={sectionRef} id="selected-works">
       {projectsData.map((project, index) => (
         <div
           key={project.title}
@@ -108,7 +160,7 @@ function SelectedWorks() {
         </div>
       ))}
 
-      <TechStacks techs={currentTechs} />
+      {showTechStacks && <TechStacks techs={currentTechs} isAnimatingOut={isAnimatingOut} />}
     </div>
   )
 }

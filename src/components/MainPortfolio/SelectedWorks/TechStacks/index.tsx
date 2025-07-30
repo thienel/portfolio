@@ -24,47 +24,46 @@ const techList = [
   { id: 'Cs', title: 'C#', size: '24px' },
 ] as const
 
-function TechStacks({ techs }: { techs: string[] }) {
+function TechStacks({ techs, isAnimatingOut }: { techs: string[]; isAnimatingOut: boolean }) {
   const itemsRef = useRef<(HTMLDivElement | null)[]>([])
   const containerRef = useRef<HTMLDivElement | null>(null)
-  const wrapperRef = useRef<HTMLDivElement | null>(null)
 
+  // Fade in animation when component mounts
   useEffect(() => {
-    if (!wrapperRef.current) return
+    if (!containerRef.current) return
 
+    // Set initial state and fade in
     gsap.fromTo(
-      wrapperRef.current,
-      { autoAlpha: 0, y: 30 },
-      {
-        autoAlpha: 1,
-        y: 0,
-        duration: 0.5,
-        ease: 'power3.out',
-      },
+      containerRef.current,
+      { opacity: 0 },
+      { opacity: 1, duration: 0.5, ease: 'power2.out' },
     )
-
-    return () => {
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      gsap.to(wrapperRef.current, {
-        autoAlpha: 0,
-        y: 30,
-        duration: 0.3,
-        ease: 'power3.in',
-      })
-    }
   }, [])
 
+  // Fade out animation when isAnimatingOut becomes true
   useEffect(() => {
-    itemsRef.current.forEach(el => {
-      if (!el) return
+    if (!isAnimatingOut || !containerRef.current) return
+
+    gsap.to(containerRef.current, {
+      opacity: 0,
+      duration: 0.3,
+      ease: 'power2.in',
+    })
+  }, [isAnimatingOut])
+
+  // Handle tech selection changes
+  useEffect(() => {
+    const validItems = itemsRef.current.filter(item => item !== null)
+
+    validItems.forEach(el => {
       const id = el.dataset.id
       const isSelected = techs.includes(id!)
 
       gsap.to(el, {
-        autoAlpha: isSelected ? 1 : 0.5,
+        opacity: isSelected ? 1 : 0.5,
         scale: isSelected ? 1 : 0.95,
-        duration: 0.25,
-        ease: 'sine.in',
+        duration: 0.3,
+        ease: 'power2.out',
       })
     })
   }, [techs])
