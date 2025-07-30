@@ -1,0 +1,78 @@
+.wrapper {
+  width: 80%;
+  margin: 150px 0;
+}
+
+.title-wrapper {
+  margin-bottom: 6px;
+  h1 {
+    font-size: 32px;
+    font-weight: 800;
+    margin: 4px 0;
+    color: $white;
+  }
+  h2 {
+    font-size: 28px;
+    color: $grey;
+  }
+}
+
+.body {
+  display: grid;
+  grid-template-columns: 3fr 10fr 2fr;
+  grid-template-rows: auto 60px auto;
+}
+
+.image {
+  margin: 18px auto 32px;
+  width: 90%;
+  border-radius: 8px;
+  border-end-start-radius: 4px;
+  border-end-end-radius: 4px;
+  grid-column: 1/4;
+  grid-row: 1;
+}
+
+.body-item {
+  h2 {
+    color: $grey;
+  }
+}
+
+.event {
+  grid-column: 1/2;
+  grid-row: 2/3;
+}
+
+.year {
+  grid-column: 1/2;
+  grid-row: 3/4;
+}
+
+.description {
+  grid-column: 2/3;
+  grid-row: 2/4;
+
+  margin: 20px 0;
+
+  p {
+    text-align: justify;
+  }
+}
+
+.github {
+  grid-column: 3/4;
+  grid-row: 2/4;
+  justify-self: end;
+}
+
+.description.noimg {
+  grid-column: 1/4;
+  grid-row: 1/2;
+}
+
+.year.noimg {
+  grid-column: 2/3;
+  grid-row: 2/3;
+  justify-self: center;
+}
