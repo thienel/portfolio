@@ -59,6 +59,7 @@ const projectsData = [
     year: 2025,
     imageUrl: '/images/Portfolio.png',
     techs: ['React', 'Scss', 'WebGL', 'Ts'],
+    githubUrl: 'https://www.lethien.dev',
   },
 ]
 

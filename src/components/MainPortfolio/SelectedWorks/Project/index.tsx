@@ -35,7 +35,12 @@ function Project({ title, type, description, year, githubUrl, imageUrl }: Projec
           <p>{description}</p>
         </div>
         <div className={cx('github')}>
-          <a href={githubUrl} className={cx('project-link')}>
+          <a
+            href={githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={cx('project-link')}
+          >
             View Project →
           </a>
         </div>

@@ -123,6 +123,8 @@
   justify-self: end;
   align-self: start;
   margin-top: 20px;
+  cursor: pointer;
+  user-select: none;
 }
 
 .project-link {
