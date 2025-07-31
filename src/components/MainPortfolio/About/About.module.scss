@@ -8,8 +8,29 @@
   padding-right: 10%;
 }
 
+.section-header {
+  animation: fadeInUp 0.6s ease-out;
+
+  // Disable animation when using scroll-triggered animations
+  &.no-animation {
+    animation: none;
+  }
+
+  h1 {
+    font-size: 64px;
+    font-weight: 1000;
+    margin-top: 100px;
+    opacity: 0.8;
+  }
+}
+
 .content {
   animation: fadeInUp 0.8s ease-out;
+
+  // Disable animation when using scroll-triggered animations
+  &.no-animation {
+    animation: none;
+  }
 }
 
 .intro {
@@ -22,6 +43,11 @@
   animation: slideInLeft 0.8s ease-out;
   animation-delay: 0.2s;
   animation-fill-mode: both;
+
+  // Disable animation when using scroll-triggered animations
+  &.no-animation {
+    animation: none;
+  }
 }
 
 .details {
@@ -34,6 +60,11 @@
   animation: slideInLeft 0.8s ease-out;
   animation-delay: 0.4s;
   animation-fill-mode: both;
+
+  // Disable animation when using scroll-triggered animations
+  &.no-animation {
+    animation: none;
+  }
 }
 
 .highlight {

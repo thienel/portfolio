@@ -4,6 +4,7 @@ import TechStacks from './TechStacks'
 import Project from './Project'
 import { useEffect, useRef, useState } from 'react'
 import { useIntersectionObserver } from '~/hooks/useIntersectionObserver'
+import { useScrollAnimation } from '~/hooks/useScrollAnimation'
 
 const cx = classNames.bind(styles)
 
@@ -70,6 +71,12 @@ function SelectedWorks() {
   const projectRefs = useRef<(HTMLElement | null)[]>([])
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
 
+  const { elementRef: headerRef } = useScrollAnimation({
+    animationType: 'fadeUp',
+    duration: 800,
+    delay: 200,
+  })
+
   const { elementRef: sectionRef } = useIntersectionObserver<HTMLDivElement>({
     threshold: 0.1,
     rootMargin: '0px 0px -20% 0px',
@@ -125,7 +132,7 @@ function SelectedWorks() {
           }
         })
       },
-      { threshold: 0.5 },
+      { threshold: 0.75 },
     )
 
     projectRefs.current.forEach(ref => {
@@ -142,7 +149,7 @@ function SelectedWorks() {
 
   return (
     <div className={cx('wrapper')} ref={sectionRef} id="selected-works">
-      <div className={cx('section-header')}>
+      <div className={cx('section-header')} ref={headerRef}>
         <h1>Selected Works</h1>
       </div>
 

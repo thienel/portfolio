@@ -13,6 +13,17 @@
   flex-direction: column;
   overflow-y: scroll;
   scrollbar-width: none;
+  scroll-behavior: smooth;
+
+  // Simple fade-in on load
+  opacity: 0;
+  animation: portfolioFadeIn 1s ease-out 0.5s forwards;
+}
+
+@keyframes portfolioFadeIn {
+  to {
+    opacity: 1;
+  }
 }
 
 .description {

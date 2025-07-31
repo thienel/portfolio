@@ -36,7 +36,7 @@ function TechStacks({ techs, isAnimatingOut }: { techs: string[]; isAnimatingOut
     gsap.fromTo(
       containerRef.current,
       { opacity: 0 },
-      { opacity: 1, duration: 0.5, ease: 'power2.out' },
+      { opacity: 1, duration: 1.5, ease: 'power2.out' },
     )
   }, [])
 
@@ -62,8 +62,8 @@ function TechStacks({ techs, isAnimatingOut }: { techs: string[]; isAnimatingOut
       gsap.to(el, {
         opacity: isSelected ? 1 : 0.5,
         scale: isSelected ? 1 : 0.95,
-        duration: 0.3,
-        ease: 'power2.out',
+        duration: 0.5,
+        ease: 'sine.out',
       })
     })
   }, [techs])

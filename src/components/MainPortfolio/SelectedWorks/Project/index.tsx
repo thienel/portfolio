@@ -1,5 +1,6 @@
 import styles from './Project.module.scss'
 import classNames from 'classnames/bind'
+import { useScrollAnimation } from '~/hooks/useScrollAnimation'
 
 const cx = classNames.bind(styles)
 
@@ -13,14 +14,26 @@ interface ProjectProps {
 }
 
 function Project({ title, type, description, year, githubUrl, imageUrl }: ProjectProps) {
+  const { elementRef: titleRef } = useScrollAnimation({
+    animationType: 'fadeUp',
+    duration: 800,
+    delay: 200,
+  })
+
+  const { elementRef: bodyRef } = useScrollAnimation({
+    animationType: 'fadeUp',
+    duration: 800,
+    delay: 400,
+  })
+
   return (
     <div className={cx('wrapper')}>
-      <div className={cx('title-wrapper')}>
+      <div className={cx('title-wrapper')} ref={titleRef}>
         <h1>{title}</h1>
         <h2>{type}</h2>
       </div>
 
-      <div className={cx('body')}>
+      <div className={cx('body')} ref={bodyRef}>
         {imageUrl && <img src={imageUrl} alt={`${title} preview`} className={cx('image')} />}
         <div className={cx('body-item', 'event')}>
           <h2>Event</h2>
