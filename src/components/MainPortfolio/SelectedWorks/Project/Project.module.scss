@@ -1,6 +1,6 @@
 .wrapper {
   width: 80%;
-  margin: 150px 0;
+  margin-bottom: 300px;
   position: relative;
   padding-left: 20px;
   border-left: 2px solid rgba(255, 255, 255, 0.08);
@@ -107,6 +107,7 @@
   grid-column: 2/3;
   grid-row: 2/4;
   margin: 20px 0;
+  padding-right: 20px;
 
   p {
     text-align: justify;

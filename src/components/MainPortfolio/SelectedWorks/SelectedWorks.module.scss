@@ -8,14 +8,13 @@
 }
 
 .section-header {
-  margin-bottom: 60px;
+  margin-bottom: 250px;
   animation: fadeInUp 0.6s ease-out;
 
-  p {
-    font-size: 18px;
-    font-weight: 300;
-    line-height: 28px;
-    margin: 0;
+  h1 {
+    font-size: 64px;
+    font-weight: 1000;
+    margin: 150px 0px 50px 0px;
     opacity: 0.8;
   }
 }

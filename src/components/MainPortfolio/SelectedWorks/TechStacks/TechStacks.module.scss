@@ -1,18 +1,18 @@
 .wrapper {
   position: fixed;
   top: 50%;
-  right: 60px;
+  right: 50px;
   bottom: 600px;
-  height: 400px;
-  width: 300px;
+  height: 550px;
+  width: 400px;
   transform: translateY(-50%);
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
 
   h1 {
-    font-size: 32px;
-    font-weight: 700;
+    font-size: 40px;
+    font-weight: 600;
     width: 100%;
   }
 }
@@ -22,8 +22,8 @@
   gap: 5px;
   background-color: $bg-grey;
   border-radius: 12px;
-  height: 40px;
-  padding: 0 10px;
+  height: 60px;
+  padding: 0 15px;
   transform-origin: center;
 }
 
@@ -33,7 +33,7 @@
 }
 
 .title {
-  font-size: 12px;
+  font-size: 13px;
   color: $light_grey;
 }
 
