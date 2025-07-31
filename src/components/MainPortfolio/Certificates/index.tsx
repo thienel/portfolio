@@ -62,8 +62,8 @@ function Certificates() {
             <p className={cx('issuer')}>FPT University • 2023–Present</p>
           </div>
           <p className={cx('description')}>
-            50% tuition scholarship awarded for academic excellence and demonstrated potential in
-            software engineering and technology innovation.
+            A 50% tuition scholarship awarded for the complete duration of studies, conferred upon
+            individuals for their superior accomplishments.
           </p>
           <a
             href="/certificates/chung_nhan_hoc_bong.pdf"
