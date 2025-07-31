@@ -8,15 +8,18 @@
 }
 
 .section-header {
-  margin-bottom: 40px;
+  animation: fadeInUp 0.6s ease-out;
 
-  p {
-    font-size: 18px;
-    font-weight: 300;
-    line-height: 28px;
-    margin: 0;
+  // Disable animation when using scroll-triggered animations
+  &.no-animation {
+    animation: none;
+  }
+
+  h1 {
+    font-size: 48px;
+    font-weight: 1000;
+    margin-top: 100px;
     opacity: 0.8;
-    animation: fadeInUp 0.6s ease-out;
   }
 }
 
@@ -42,6 +45,11 @@
   }
   &:nth-child(3) {
     animation-delay: 0.6s;
+  }
+
+  // Disable animation when using scroll-triggered animations
+  &.no-animation {
+    animation: none;
   }
 
   &::before {

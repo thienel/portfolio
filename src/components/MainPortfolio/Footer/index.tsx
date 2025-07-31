@@ -1,13 +1,32 @@
 import classNames from 'classnames/bind'
 import styles from './Footer.module.scss'
+import { useScrollAnimation } from '~/hooks/useScrollAnimation'
 
 const cx = classNames.bind(styles)
 
 function Footer() {
+  const { elementRef: wrapperRef } = useScrollAnimation({
+    animationType: 'fadeUp',
+    duration: 800,
+    delay: 200,
+  })
+
+  const { elementRef: mainSectionRef } = useScrollAnimation({
+    animationType: 'slideLeft',
+    duration: 800,
+    delay: 400,
+  })
+
+  const { elementRef: bottomSectionRef } = useScrollAnimation({
+    animationType: 'fadeIn',
+    duration: 600,
+    delay: 600,
+  })
+
   return (
-    <footer className={cx('wrapper')} id="footer">
+    <footer className={cx('wrapper', 'no-animation')} id="footer" ref={wrapperRef}>
       <div className={cx('content')}>
-        <div className={cx('main-section')}>
+        <div className={cx('main-section', 'no-animation')} ref={mainSectionRef}>
           <div className={cx('brand')}>
             <h3>Le Hung Thien</h3>
             <p>Backend Developer & Problem Solver</p>
@@ -24,7 +43,7 @@ function Footer() {
                     rel="noopener noreferrer"
                     className={cx('footer-link')}
                   >
-                    GitHub →
+                    GitHub
                   </a>
                 </li>
                 <li>
@@ -34,12 +53,12 @@ function Footer() {
                     rel="noopener noreferrer"
                     className={cx('footer-link')}
                   >
-                    LinkedIn →
+                    LinkedIn
                   </a>
                 </li>
                 <li>
                   <a href="mailto:lethien.dev@gmail.com" className={cx('footer-link')}>
-                    Email →
+                    Email
                   </a>
                 </li>
               </ul>
@@ -55,17 +74,17 @@ function Footer() {
                     rel="noopener noreferrer"
                     className={cx('footer-link')}
                   >
-                    Resume →
+                    Resume
                   </a>
                 </li>
                 <li>
                   <a href="#selected-works" className={cx('footer-link')}>
-                    Projects →
+                    Projects
                   </a>
                 </li>
                 <li>
                   <a href="#certificates" className={cx('footer-link')}>
-                    Certificates →
+                    Certificates
                   </a>
                 </li>
               </ul>
@@ -75,12 +94,9 @@ function Footer() {
 
         <div className={cx('divider')}></div>
 
-        <div className={cx('bottom-section')}>
+        <div className={cx('bottom-section')} ref={bottomSectionRef}>
           <div className={cx('copyright')}>
-            <p>© 2025 Le Hung Thien. Crafted with care and attention to detail.</p>
-          </div>
-          <div className={cx('tech-stack')}>
-            <p>Built with React, TypeScript, SCSS & WebGL</p>
+            <p>&copy; 2025 Le Hung Thien</p>
           </div>
         </div>
       </div>

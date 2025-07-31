@@ -132,7 +132,7 @@ function SelectedWorks() {
           }
         })
       },
-      { threshold: 0.75 },
+      { threshold: 0.8 },
     )
 
     projectRefs.current.forEach(ref => {

@@ -54,7 +54,7 @@ function Project({ title, type, description, year, githubUrl, imageUrl }: Projec
             rel="noopener noreferrer"
             className={cx('project-link')}
           >
-            View Project →
+            View Project
           </a>
         </div>
       </div>
