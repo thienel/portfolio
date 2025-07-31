@@ -9,19 +9,19 @@ const cx = classNames.bind(styles)
 const techList = [
   { id: 'smtp', title: 'SMTP', size: '20px' },
   { id: 'React', title: 'React', size: '16px' },
+  { id: 'Go', title: 'Golang', size: '23px' },
   { id: 'entity', title: 'Entity Framework', size: '20px' },
   { id: 'SqlServer', title: 'SQL Server', size: '25px' },
-  { id: 'Go', title: 'Golang', size: '23px' },
   { id: 'WebGL', title: 'WebGL', size: '30px' },
   { id: 'cleanarchitecture', title: 'Clean Architecture', size: '20px' },
   { id: 'jwt', title: 'JWT', size: '20px' },
   { id: 'PostgreSQL', title: 'PostgreSQL', size: '18px' },
   { id: 'identity', title: 'Identity', size: '20px' },
+  { id: 'Scss', title: 'SCSS', size: '20px' },
+  { id: 'Cs', title: 'C#', size: '24px' },
   { id: 'MySQL', title: 'MySQL', size: '25px' },
-  { id: 'gsap', title: 'GSAP', size: '20px' },
   { id: 'Js', title: 'Javascript', size: '15px' },
   { id: 'Ts', title: 'TypeScript', size: '15px' },
-  { id: 'Cs', title: 'C#', size: '24px' },
 ] as const
 
 function TechStacks({ techs, isAnimatingOut }: { techs: string[]; isAnimatingOut: boolean }) {

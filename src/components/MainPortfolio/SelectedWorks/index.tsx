@@ -12,7 +12,7 @@ const projectsData = [
     title: 'Greenlight',
     type: 'REST API',
     description:
-      "This project was built while following Let's Go Further by Alex Edwards, which significantly deepened my understanding of Go backend development. It's a movie database management system featuring full CRUD operations, token-based authentication, and permission-based access control (PBAC). The project was developed entirely through the command-line interface, helping me grasp real-world workflows and production-ready patterns.",
+      "This project provides RESTful API access for movie database management. Authentication is token-based, secured with bcrypt at a cost of 12, and authorization employs a permission-based access control scheme. The project's architecture and implementation largely follow Alex Edwards' \"Let's Go Further,\" incorporating key best practices such as data filtering and pagination, structured JSON logging, API rate limiting, and graceful application shutdown.",
     technologies: ['Golang', 'PostgreSQL'],
     githubUrl: 'https://github.com/thienel/greenlight',
     year: 2025,
@@ -22,7 +22,7 @@ const projectsData = [
     title: 'Snippetbox',
     type: 'Web Application',
     description:
-      "This was the first project where I used Golang, developed alongside the book Let's Go by Alex Edwards. It was through this project that I discovered how enjoyable Go can be. The application itself is a snippet management tool with expiration support and user login based on session authentication. The book covers nearly everything you need to learn and start using the language effectively. While the project doesn't dive into highly advanced techniques, it gave me a solid and practical foundation to build upon.",
+      'This project implements time-limited snippet storage, with user authentication managed via database-persisted sessions. The system incorporates both unit tests and integration tests to ensure its reliability.',
     technologies: ['Golang', 'MySQL'],
     githubUrl: 'https://github.com/thienel/snippetbox',
     year: 2025,
@@ -33,7 +33,7 @@ const projectsData = [
     title: 'Tiktok Clone Backend',
     type: 'Web API',
     description:
-      'This is a simulated backend API built to support my tiktok-clone-ui frontend project. The key takeaway from this project was learning how to structure code effectively using Clean Architecture principles. I also implemented all JWT-related features — a significant challenge for me at the time.',
+      "This project provides the API for the TikTokClone UI (mentioned below). It's built strictly adhering to Clean Architecture principles and uses JWT for user authentication. Additionally, it includes rate limiting and a global error handling middleware. In the future, this project will be expanded to cover video and messaging functionalities, moving towards a microservices architecture.",
     technologies: ['C#', 'SQL Server', 'JWT', 'Entity Framework', 'Identity'],
     githubUrl: 'https://github.com/thienel/tiktok-clone-api',
     year: 2025,
@@ -43,22 +43,22 @@ const projectsData = [
     title: 'Tiktok Clone Frontend',
     type: 'Web UI',
     description:
-      'This was the first project where I worked with ReactJS. The most challenging part was organizing components — I spent most of my time figuring out how to split and structure them in a clean and maintainable way. Integrating the frontend with the backend API also gave me a clearer understanding of how everything connects and works together. Working with plain JavaScript made refactoring quite difficult, which later motivated me to build my portfolio site using TypeScript instead.',
+      'This project meticulously simulates the UI and details of TikTok. It incorporates features like theme switching, real-time form validation, and comprehensive authentication related functionalities.',
     technologies: ['ReactJS', 'SCSS', 'Axios'],
     githubUrl: 'https://github.com/thienel/tiktok-clone-ui',
     year: 2025,
     imageUrl: '/images/TiktokCloneUI.png',
-    techs: ['React', 'jwt', 'Js'],
+    techs: ['React', 'jwt', 'Js', 'Scss'],
   },
   {
     title: 'Portfolio',
     type: 'Website',
     description:
-      'This self-initiated project was built to recreate UI effects that I found compelling. The computer simulation (lethien.dev) was inspired by Edward Hinrichsen and the background behind this was inspired from Keita Yamada. It also marked my first experience working with WebGL, TypeScript, and GSAP — technologies that initially made the development process quite challenging. Overcoming these hurdles significantly deepened my understanding of browser-based graphics and animation.',
+      'The project is inspired by Edward Hinrichsen and Keita Yamada, and was completed with significant contributions from AI.',
     technologies: ['React', 'TypeScript', 'Vite', 'GSAP', 'WebGL'],
     year: 2025,
     imageUrl: '/images/Portfolio.png',
-    techs: ['React', 'gsap', 'WebGL', 'Ts'],
+    techs: ['React', 'Scss', 'WebGL', 'Ts'],
   },
 ]
 
@@ -142,9 +142,7 @@ function SelectedWorks() {
   return (
     <div className={cx('wrapper')} ref={sectionRef} id="selected-works">
       <div className={cx('section-header')}>
-        <p>
-          A curated collection of projects showcasing technical growth and problem-solving approach.
-        </p>
+        <h1>Selected Works</h1>
       </div>
 
       <div className={cx('projects-container')}>

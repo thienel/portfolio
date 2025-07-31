@@ -9,6 +9,7 @@ import SqlServer from './sqlserver.svg?react'
 import Ts from './typescript.svg?react'
 import WebGL from './webgl.svg?react'
 import ReactIcon from './react.svg?react'
+import Scss from './sass.svg?react'
 
 const logoList = {
   Cs,
@@ -19,6 +20,7 @@ const logoList = {
   SqlServer,
   Ts,
   WebGL,
+  Scss,
   React: ReactIcon,
 } as const satisfies Record<string, FC<SVGProps<SVGSVGElement>>>
 

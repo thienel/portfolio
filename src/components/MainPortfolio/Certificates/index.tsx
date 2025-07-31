@@ -33,7 +33,7 @@ function Certificates() {
 
         <div className={cx('certificate')}>
           <div className={cx('certificate-header')}>
-            <h3>Academic Merit Scholarship</h3>
+            <h3>FPTU-1000 Scholarship</h3>
             <p className={cx('issuer')}>FPT University • 2023–Present</p>
           </div>
           <p className={cx('description')}>
@@ -52,7 +52,7 @@ function Certificates() {
 
         <div className={cx('certificate')}>
           <div className={cx('certificate-header')}>
-            <h3>Dean's List Recognition</h3>
+            <h3>Honorable Student Of Trimester</h3>
             <p className={cx('issuer')}>FPT University • Fall 2024</p>
           </div>
           <p className={cx('description')}>
