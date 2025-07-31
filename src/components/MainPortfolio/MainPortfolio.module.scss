@@ -15,17 +15,24 @@
   scrollbar-width: none;
   scroll-behavior: smooth;
 
-  // Simple fade-in on load
+  // Initial state - hidden until preloader completes
   opacity: 0;
-  animation: portfolioFadeIn 1s ease-out 0.5s forwards;
+
+  // Show content after preloader
+  &.content-visible {
+    opacity: 1;
+    animation: contentFadeIn 1s ease-out;
+  }
 }
 
-@keyframes portfolioFadeIn {
+@keyframes contentFadeIn {
+  from {
+    opacity: 0;
+  }
   to {
     opacity: 1;
   }
 }
-
 .description {
   width: $width-content;
   margin-top: 12px;

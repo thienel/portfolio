@@ -7,20 +7,42 @@ import Certificates from './Certificates'
 import About from './About'
 import SelectedWorks from './SelectedWorks'
 import Footer from './Footer'
+import Preloader from '@components/Preloader'
+import { useState, useEffect } from 'react'
 
 const cx = classNames.bind(styles)
 
 function MainPortfolio() {
+  const [isLoading, setIsLoading] = useState(true)
+  const [showContent, setShowContent] = useState(false)
+
+  useEffect(() => {
+    // Wait for component to mount and then start checking for image loading
+    const timer = setTimeout(() => {
+      setIsLoading(false)
+    }, 100) // Short delay to ensure component is mounted
+
+    return () => clearTimeout(timer)
+  }, [])
+
+  const handlePreloadComplete = () => {
+    setShowContent(true)
+  }
+
   return (
-    <div className={cx('wrapper')} id="main-portfolio">
-      <ParticleWaveBackground />
-      <Header />
-      <NavBar />
-      <About />
-      <SelectedWorks />
-      <Certificates />
-      <Footer />
-    </div>
+    <>
+      <Preloader isLoading={isLoading} onComplete={handlePreloadComplete} />
+
+      <div className={cx('wrapper', { 'content-visible': showContent })} id="main-portfolio">
+        <ParticleWaveBackground />
+        <Header />
+        <NavBar />
+        <About />
+        <SelectedWorks />
+        <Certificates />
+        <Footer />
+      </div>
+    </>
   )
 }
 
