@@ -80,10 +80,7 @@ function Certificates() {
             <h3>Honorable Student Of Trimester</h3>
             <p className={cx('issuer')}>FPT University • Fall 2024</p>
           </div>
-          <p className={cx('description')}>
-            Semester honors for outstanding academic performance and active contribution to
-            university community and technical initiatives.
-          </p>
+          <p className={cx('description')}>Semester honors for outstanding academic performance.</p>
           <a
             href="/certificates/HSFall2024.pdf"
             target="_blank"
