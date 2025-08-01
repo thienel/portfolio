@@ -12,4 +12,8 @@
   font-family: $gothic-font;
   font-size: 120px;
   color: $primary;
+
+  @media (max-width: $mobile) {
+    font-size: 80px;
+  }
 }

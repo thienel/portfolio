@@ -11,6 +11,14 @@
   font-size: 15px;
   color: $white;
 
+  @media (max-width: $mobile) {
+    width: 90%;
+    height: 80px;
+    grid-template-columns: 1fr auto;
+    gap: 20px;
+    padding: 0 20px;
+  }
+
   a {
     text-decoration: none;
     transition: all 0.25s ease;
@@ -54,14 +62,27 @@
   display: flex;
   gap: 40px;
 
+  @media (max-width: $mobile) {
+    justify-self: end;
+    gap: 20px;
+  }
+
   a {
     font-weight: 300;
     font-size: 14px;
+
+    @media (max-width: $mobile) {
+      font-size: 12px;
+    }
   }
 }
 
 .email {
   justify-self: end;
+
+  @media (max-width: $mobile) {
+    display: none;
+  }
 
   a {
     font-weight: 300;

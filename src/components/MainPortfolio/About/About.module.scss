@@ -6,6 +6,12 @@
   width: 70%;
   min-height: 100vh;
   padding-right: 10%;
+
+  @media (max-width: $mobile) {
+    width: 90%;
+    padding-right: 0;
+    padding: 0 20px;
+  }
 }
 
 .section-header {
@@ -21,6 +27,11 @@
     font-weight: 1000;
     margin-top: 100px;
     opacity: 0.8;
+
+    @media (max-width: $mobile) {
+      font-size: 32px;
+      margin-top: 60px;
+    }
   }
 }
 
@@ -44,6 +55,11 @@
   animation-delay: 0.2s;
   animation-fill-mode: both;
 
+  @media (max-width: $mobile) {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
   // Disable animation when using scroll-triggered animations
   &.no-animation {
     animation: none;
@@ -60,6 +76,11 @@
   animation: slideInLeft 0.8s ease-out;
   animation-delay: 0.4s;
   animation-fill-mode: both;
+
+  @media (max-width: $mobile) {
+    font-size: 18px;
+    line-height: 28px;
+  }
 
   // Disable animation when using scroll-triggered animations
   &.no-animation {
@@ -88,6 +109,10 @@
   opacity: 0.7;
   font-style: italic;
   font-size: 26px;
+
+  @media (max-width: $mobile) {
+    font-size: 18px;
+  }
 }
 
 .resume-link {

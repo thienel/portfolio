@@ -5,12 +5,25 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: $mobile) {
+    width: 90%;
+    flex-direction: column;
+    text-align: center;
+    padding: 40px 20px;
+  }
 }
 
 .title {
   width: 55%;
   font-weight: 300;
   animation: slideInLeft 0.8s ease-out;
+
+  @media (max-width: $mobile) {
+    width: 100%;
+    order: 2;
+    margin-top: 20px;
+  }
 
   h1 {
     font-size: 68px;
@@ -21,6 +34,11 @@
     animation: fadeInUp 1s ease-out;
     animation-delay: 0.2s;
     animation-fill-mode: both;
+
+    @media (max-width: $mobile) {
+      font-size: 36px;
+      margin: 10px 0;
+    }
   }
 
   p {
@@ -33,6 +51,12 @@
     animation: fadeInUp 1s ease-out;
     animation-delay: 0.4s;
     animation-fill-mode: both;
+
+    @media (max-width: $mobile) {
+      font-size: 18px;
+      line-height: 26px;
+      margin: 8px 0;
+    }
   }
 }
 
@@ -45,6 +69,13 @@
   animation: slideInRight 0.8s ease-out;
   animation-delay: 0.6s;
   animation-fill-mode: both;
+
+  @media (max-width: $mobile) {
+    margin-left: 0;
+    width: 180px;
+    height: 180px;
+    order: 1;
+  }
 
   &:hover {
     transform: scale(1.03) rotate(2deg);

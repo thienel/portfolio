@@ -10,6 +10,10 @@
   flex-wrap: wrap;
   gap: 15px;
 
+  @media (max-width: $mobile) {
+    display: none;
+  }
+
   h1 {
     font-size: 40px;
     font-weight: 600;
