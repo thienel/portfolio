@@ -7,7 +7,6 @@ import Terminal from '../../terminal'
 export default function Screen(assists: Assists, renderer: THREE.WebGLRenderer) {
   const sceneRTT = new THREE.Scene()
 
-  // Geometry
   const backGround = new THREE.Mesh(
     new THREE.PlaneGeometry(1, 1, 1, 1),
     new THREE.MeshBasicMaterial({ color: 'red' }),

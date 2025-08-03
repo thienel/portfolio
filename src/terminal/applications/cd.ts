@@ -10,7 +10,6 @@ export default function cd(print: PrintFunction, path: FileSystemPath, root: Fil
 
   const app = (args: string[]) => {
     if (args.length === 0 || args[0] === '~') {
-      // Go to home directory (/home/user)
       try {
         path.p = getHomePath(root)
       } catch {
@@ -21,20 +20,16 @@ export default function cd(print: PrintFunction, path: FileSystemPath, root: Fil
 
     let targetPath = args[0]
 
-    // Expand home path if it starts with ~
     targetPath = expandHomePath(targetPath)
 
     const parts = targetPath.split('/').filter(Boolean)
     let newPath: FileSystemNode[]
     let current: FileSystemNode
 
-    // Determine if this is an absolute path (starts with home/user) or relative
     if (targetPath.startsWith('home/user/') || targetPath === 'home/user') {
-      // Absolute path from root
       newPath = []
       current = root
     } else {
-      // Relative path from current directory
       newPath = [...path.p]
       try {
         current = resolveCurrentDir(root, path)

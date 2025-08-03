@@ -17,7 +17,7 @@ function NavBar() {
           LinkedIn
         </a>
         <a
-          href="resume/LeHungThien-GolangDeveloper-Resume.pdf"
+          href="resume/LeHungThien_GolangIntern_Resume.pdf"
           target="_blank"
           rel="noopener noreferrer"
         >

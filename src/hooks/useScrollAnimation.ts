@@ -19,7 +19,7 @@ export function useScrollAnimation<T extends HTMLElement = HTMLDivElement>(
 
   const {
     threshold = 0.1,
-    rootMargin = '0px 0px -50px 0px', // Changed default to prevent immediate trigger
+    rootMargin = '0px 0px -50px 0px',
     animationType = 'fadeUp',
     duration = 800,
     delay = 0,
@@ -31,7 +31,6 @@ export function useScrollAnimation<T extends HTMLElement = HTMLDivElement>(
 
     const element = elementRef.current
 
-    // Set initial styles based on animation type
     const setInitialStyles = () => {
       element.style.transition = `opacity ${duration}ms cubic-bezier(0.4, 0, 0.2, 1), transform ${duration}ms cubic-bezier(0.4, 0, 0.2, 1)`
       element.style.transitionDelay = `${delay}ms`
@@ -61,17 +60,14 @@ export function useScrollAnimation<T extends HTMLElement = HTMLDivElement>(
       }
     }
 
-    // Set final styles for animation
     const setFinalStyles = () => {
       element.style.opacity = '1'
       element.style.transform = 'translateY(0) translateX(0) scale(1)'
-      // Remove will-change after animation completes
       setTimeout(() => {
         element.style.willChange = 'auto'
       }, duration + delay)
     }
 
-    // Reset to initial styles
     const resetStyles = () => {
       switch (animationType) {
         case 'fadeUp':
@@ -99,7 +95,6 @@ export function useScrollAnimation<T extends HTMLElement = HTMLDivElement>(
 
     setInitialStyles()
 
-    // Delay observer creation to prevent immediate animations
     const timeoutId = setTimeout(() => {
       const observer = new IntersectionObserver(
         ([entry]) => {
@@ -122,7 +117,7 @@ export function useScrollAnimation<T extends HTMLElement = HTMLDivElement>(
 
       observer.observe(element)
       observerRef.current = observer
-    }, 100) // Small delay to prevent immediate triggering
+    }, 100)
 
     return () => {
       clearTimeout(timeoutId)

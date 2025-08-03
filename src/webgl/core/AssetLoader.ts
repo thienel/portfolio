@@ -53,7 +53,6 @@ export class AssetLoader {
 
     console.log('Loading complete!')
 
-    // Smooth fadeout
     setTimeout(() => {
       if (this.loadingElements.loadingDOM) {
         ;(this.loadingElements.loadingDOM as HTMLElement).style.opacity = '0'
@@ -128,7 +127,6 @@ export class AssetLoader {
         if (texturesLoaded === totalTextures) resolve()
       }
 
-      // Bake texture
       textureLoader.load(
         '/textures/bake-quality-5.jpg',
         texture => {
@@ -145,7 +143,6 @@ export class AssetLoader {
         },
       )
 
-      // Floor texture
       textureLoader.load(
         '/textures/bake_floor-quality-3.jpg',
         texture => {
@@ -162,7 +159,6 @@ export class AssetLoader {
         },
       )
 
-      // Environment map
       cubeTextureLoader.load(
         [
           '/textures/environmentMap/px.jpg',
@@ -222,7 +218,6 @@ export class AssetLoader {
   }
 }
 
-// Legacy function for backwards compatibility
 export function loadAssists(callback: LoadingCallback): void {
   const loader = new AssetLoader(callback)
   loader.loadAssets().catch(console.error)

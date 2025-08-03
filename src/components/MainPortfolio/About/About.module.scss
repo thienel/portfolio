@@ -17,7 +17,6 @@
 .section-header {
   animation: fadeInUp 0.6s ease-out;
 
-  // Disable animation when using scroll-triggered animations
   &.no-animation {
     animation: none;
   }
@@ -38,7 +37,6 @@
 .content {
   animation: fadeInUp 0.8s ease-out;
 
-  // Disable animation when using scroll-triggered animations
   &.no-animation {
     animation: none;
   }
@@ -60,7 +58,6 @@
     line-height: 28px;
   }
 
-  // Disable animation when using scroll-triggered animations
   &.no-animation {
     animation: none;
   }
@@ -82,7 +79,6 @@
     line-height: 28px;
   }
 
-  // Disable animation when using scroll-triggered animations
   &.no-animation {
     animation: none;
   }

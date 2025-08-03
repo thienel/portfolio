@@ -49,7 +49,6 @@ function loadAssists(callback: (assists: Assists) => void) {
     )
   }
 
-  // Fonts
   const fontLoader = new FontLoader(manager)
   fontLoader.load('/fonts/public-pixel.json', font => {
     assists.publicPixelFont = font
@@ -58,9 +57,6 @@ function loadAssists(callback: (assists: Assists) => void) {
     assists.chillFont = font
   })
 
-  // Texture
-
-  // Texture
   const textureLoader = new THREE.TextureLoader(manager)
   textureLoader.load('/textures/bake-quality-5.jpg', tex => {
     tex.flipY = false
@@ -90,7 +86,6 @@ function loadAssists(callback: (assists: Assists) => void) {
     },
   )
 
-  // Mesh
   const gltfLoader = new GLTFLoader(manager)
   gltfLoader.load('/models/Screen.glb', gltf => {
     const getMeshByName = (name: string): THREE.Mesh => {

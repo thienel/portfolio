@@ -38,19 +38,14 @@ export function useIntersectionObserver<T extends HTMLElement = HTMLDivElement>(
         setIsIntersecting(isCurrentlyIntersecting)
 
         if (isCurrentlyIntersecting && !wasIntersecting) {
-          // Entering the viewport
           if (!hasEnteredOnce) {
-            // First time entering
             onEnter?.()
             hasEnteredOnceRef.current = true
           } else {
-            // Entering back from below
             onEnterBack?.()
           }
         } else if (!isCurrentlyIntersecting && wasIntersecting) {
-          // Leaving the viewport
           if (hasEnteredOnce) {
-            // Determine if leaving from top or bottom based on scroll direction
             const rect = entry.boundingClientRect
             const isLeavingFromTop = rect.bottom < 0
 

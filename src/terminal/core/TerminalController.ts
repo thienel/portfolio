@@ -49,7 +49,6 @@ export class TerminalController {
     const fsTree = generateFS(files) as FileSystemPath
     this.rootNode = { name: 'root', type: 'directory', children: fsTree.p } as FileSystemNode
 
-    // Initialize path to /home/user directory
     const homeDir = this.rootNode.children?.find(c => c.name === 'home' && c.type === 'directory')
     const userDir = homeDir?.children?.find(c => c.name === 'user' && c.type === 'directory')
 
@@ -67,17 +66,14 @@ export class TerminalController {
   }
 
   private setupEventListeners(): void {
-    // Input handling
     this.textarea.addEventListener('input', () => {
       this.handleInput()
     })
 
-    // Canvas click handling
     this.canvas.addEventListener('pointerup', (event: PointerEvent) => {
       this.handleCanvasClick(event)
     })
 
-    // Keyboard handling
     window.addEventListener('keypress', (event: KeyboardEvent) => {
       this.handleKeyPress(event)
     })
@@ -86,7 +82,6 @@ export class TerminalController {
       this.handleKeyDown(event)
     })
 
-    // Selection handling
     document.addEventListener('selectionchange', () => {
       this.handleSelectionChange()
     })
@@ -142,7 +137,7 @@ export class TerminalController {
       this.textarea.focus()
 
       if (event.key.length === 1) {
-        event.preventDefault() // Prevent the default key input to avoid double typing
+        event.preventDefault()
         this.textarea.value =
           this.textarea.value.slice(0, this.lastSelection) +
           event.key +
@@ -215,7 +210,6 @@ export class TerminalController {
   }
 
   public dispose(): void {
-    // Clean up event listeners would go here
     this.isInitialized = false
   }
 }

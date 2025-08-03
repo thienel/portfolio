@@ -11,9 +11,7 @@ import classNames from 'classnames/bind'
 
 const cx = classNames.bind(styles)
 
-// Enhanced vertex shader with noise and organic movement
 const ENHANCED_VERTEX_SHADER = `
-// Simplex noise functions by Ashima Arts
 vec3 mod289(vec3 x) {
   return x - floor(x * (1.0 / 289.0)) * 289.0;
 }
@@ -95,23 +93,18 @@ uniform float uTime;
 void main() {
   vec3 pos = position;
 
-  // Create flowing wave motion like water
   float time = uTime * 5.0;
 
-  // Multiple wave layers for realistic fluid motion
   float wave1 = sin(pos.x * 0.1) * cos(pos.y * 1.0) ;
   float wave2 = sin(pos.x * 0.1 + pos.y * 0.1);
   float wave3 = cos(pos.x * 2.0 + pos.y * 1.0);
 
-  // Combine waves for natural flow
   float waveHeight = (wave1 + wave2 + wave3) * 7.5;
 
-  // Add flowing movement in XY plane
   pos.x += sin(pos.y * 1.0 + time * 0.1) * 1.0;
   pos.y += cos(pos.x * 1.0 + time * 0.1) * 1.0;
   pos.z += waveHeight;
 
-  // Distance-based size variation for depth
   float distanceFromCenter = length(pos.xy);
   float sizeFactor = 2.5;
   sizeFactor *= (1.75 - smoothstep(1.0, 1.0, distanceFromCenter));
@@ -123,7 +116,6 @@ void main() {
 }
 `
 
-// Enhanced fragment shader with glow effects
 const ENHANCED_FRAGMENT_SHADER = `
 uniform float uTime;
 
@@ -131,21 +123,16 @@ void main() {
   vec2 center = gl_PointCoord - vec2(0.5);
   float distance = length(center);
 
-  // Create flowing, wave-influenced particle appearance
   float waveInfluence = sin(uTime * 2.0 + gl_FragCoord.x * 0.02 + gl_FragCoord.y * 0.02) * 0.3 + 0.7;
 
-  // Soft circular particles with wave modulation
   float alpha = 1.0 - smoothstep(0.0, 0.5, distance);
   alpha = pow(alpha, 1.2) * waveInfluence;
 
-  // Enhanced glow for denser field
   float glow = 1.0 - smoothstep(0.0, 0.7, distance);
   glow = pow(glow, 2.5) * 0.4;
 
-  // Combine core particle with glow
   alpha = max(alpha, glow);
 
-  // Dynamic blue-white colors that flow like water
   float colorWave = sin(uTime * 1.5 + distance * 8.0) * 0.5 + 0.5;
   vec3 color = mix(vec3(0.3, 0.6, 1.0), vec3(0.8, 0.9, 1.0), colorWave);
 
@@ -154,33 +141,19 @@ void main() {
 `
 
 export interface ParticleWaveBackgroundProps {
-  /** Canvas CSS class name */
   className?: string
-  /** Number of particles (default: auto-detected based on device) */
   particleCount?: number
-  /** Animation speed multiplier (default: 1.0) */
   animationSpeed?: number
-  /** Camera position [x, y, z] (default: auto-detected based on device) */
   cameraPosition?: [number, number, number]
-  /** Camera rotation [x, y, z] (default: auto-detected based on device) */
   cameraRotation?: [number, number, number]
-  /** Custom vertex shader (optional) */
   vertexShader?: string
-  /** Custom fragment shader (optional) */
   fragmentShader?: string
-  /** Bloom intensity (default: 0.25) */
   bloomIntensity?: number
-  /** Bloom threshold (default: 0.5) */
   bloomThreshold?: number
-  /** Bloom radius (default: 0.1) */
   bloomRadius?: number
-  /** Animation frame rate limit (default: 45 FPS) */
   frameRate?: number
-  /** Callback when component finishes loading */
   onLoad?: (isLoading: boolean) => void
-  /** Enable performance monitoring */
   enableStats?: boolean
-  /** Background color (default: '#111111') */
   backgroundColor?: string
 }
 
@@ -209,7 +182,6 @@ const ParticleWaveBackground: React.FC<ParticleWaveBackgroundProps> = ({
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
-  // Increased particle density for richer visual
   const getDeviceSettings = useCallback(() => {
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
       navigator.userAgent,
@@ -217,13 +189,13 @@ const ParticleWaveBackground: React.FC<ParticleWaveBackgroundProps> = ({
 
     if (isMobile) {
       return {
-        count: particleCount || 8000, // Much denser on mobile
+        count: particleCount || 8000,
         rotation: cameraRotation || ([1, 0, 6.15] as [number, number, number]),
         position: cameraPosition || ([3.8, -0.17, 0.9] as [number, number, number]),
       }
     } else {
       return {
-        count: particleCount || 35000, // Very dense particle field for desktop
+        count: particleCount || 35000,
         rotation: cameraRotation || ([1.35, 5.5, 0.9] as [number, number, number]),
         position: cameraPosition || ([1.5, -0.55, 2.15] as [number, number, number]),
       }
@@ -236,7 +208,6 @@ const ParticleWaveBackground: React.FC<ParticleWaveBackgroundProps> = ({
     const canvas = canvasRef.current
     const settings = getDeviceSettings()
 
-    // Scene setup
     const scene = new THREE.Scene()
     const camera = new THREE.PerspectiveCamera(
       75,
@@ -251,11 +222,9 @@ const ParticleWaveBackground: React.FC<ParticleWaveBackgroundProps> = ({
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
     renderer.outputColorSpace = THREE.SRGBColorSpace
 
-    // Camera positioning
     camera.position.set(...settings.position)
     camera.rotation.set(...settings.rotation)
 
-    // Create uniforms matching your original implementation (local variables)
     const uniforms: WaveUniforms = {
       uResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
       uTime: { value: 0.0 },
@@ -263,7 +232,6 @@ const ParticleWaveBackground: React.FC<ParticleWaveBackgroundProps> = ({
       uLightPos: { value: new THREE.Vector3(-5, 5, 5).normalize() },
     }
 
-    // Create material with enhanced shaders
     const waveMat = new THREE.ShaderMaterial({
       uniforms: uniforms,
       vertexShader,
@@ -274,25 +242,22 @@ const ParticleWaveBackground: React.FC<ParticleWaveBackgroundProps> = ({
       depthTest: true,
     })
 
-    // Create denser particle grid with wave-like distribution
     const pos = new Float32Array(settings.count * 3)
     const gridSize = Math.sqrt(settings.count)
-    const spacing = 0.08 // Reduced spacing for denser particles
+    const spacing = 0.08
     const centerOffset = (gridSize * spacing) / 2
 
     for (let i = 0; i < settings.count; i++) {
       const i3 = i * 3
       const x = (i % gridSize) * spacing - centerOffset
       const y = Math.floor(i / gridSize) * spacing - centerOffset
-
-      // Add some randomness for organic feel but keep density
       const randomOffset = 0.02
       const offsetX = (Math.random() - 0.5) * randomOffset
       const offsetY = (Math.random() - 0.5) * randomOffset
 
       pos[i3 + 0] = x + offsetX
       pos[i3 + 1] = y + offsetY
-      pos[i3 + 2] = (Math.random() - 0.5) * 1.5 // More Z variation for wave depth
+      pos[i3 + 2] = (Math.random() - 0.5) * 1.5
     }
 
     const waveGeo = new THREE.BufferGeometry()
@@ -300,7 +265,6 @@ const ParticleWaveBackground: React.FC<ParticleWaveBackgroundProps> = ({
     const wave = new THREE.Points(waveGeo, waveMat)
     scene.add(wave)
 
-    // Post-processing setup
     const renderScene = new RenderPass(scene, camera)
     const bloomPass = new UnrealBloomPass(
       new THREE.Vector2(window.innerWidth, window.innerHeight),
@@ -317,7 +281,6 @@ const ParticleWaveBackground: React.FC<ParticleWaveBackgroundProps> = ({
 
     composer.setSize(window.innerWidth, window.innerHeight)
 
-    // Stats (optional) - Fixed import
     let stats: {
       begin: () => void
       end: () => void
@@ -340,7 +303,6 @@ const ParticleWaveBackground: React.FC<ParticleWaveBackgroundProps> = ({
       }
     }
 
-    // Handle window resize
     const handleResize = () => {
       composer.reset()
       renderer.resetState()
@@ -353,7 +315,6 @@ const ParticleWaveBackground: React.FC<ParticleWaveBackgroundProps> = ({
 
     window.addEventListener('resize', handleResize)
 
-    // Fixed animation loop - no more setTimeout + requestAnimationFrame
     let animationId: number
     let lastTime = 0
     const frameInterval = 1000 / frameRate
@@ -371,15 +332,12 @@ const ParticleWaveBackground: React.FC<ParticleWaveBackgroundProps> = ({
       animationId = requestAnimationFrame(animate)
     }
 
-    // Start animation
     animationId = requestAnimationFrame(animate)
 
-    // Notify parent component that loading is complete
     if (onLoad) {
       onLoad(false)
     }
 
-    // Cleanup function
     return () => {
       if (animationId) {
         cancelAnimationFrame(animationId)
@@ -390,7 +348,6 @@ const ParticleWaveBackground: React.FC<ParticleWaveBackgroundProps> = ({
         stats.dom.parentNode.removeChild(stats.dom)
       }
 
-      // Proper cleanup order
       composer.dispose()
       renderer.dispose()
 

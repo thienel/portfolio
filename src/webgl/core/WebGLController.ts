@@ -37,7 +37,6 @@ export class WebGLController {
       this.stats.showPanel(0)
       document.body.appendChild(this.stats.dom)
 
-      // Make textarea visible in debug mode
       const textarea = document.getElementById('textarea') as HTMLTextAreaElement
       if (textarea) {
         textarea.style.zIndex = '3'
@@ -92,7 +91,6 @@ export class WebGLController {
 
     this.screen = Screen(this.assists, this.sceneManager.getRenderer())
 
-    // Set screen material to the screen mesh
     this.sceneManager.getComputerGroup().children.forEach(child => {
       if (child.name === 'Screen' && this.screen) {
         ;(child as THREE.Mesh).material = this.screen.screenRenderEngine.material
@@ -111,28 +109,13 @@ export class WebGLController {
 
     const deltaTime = DeltaTime()
     const elapsedTime = this.clock.getElapsedTime()
-
-    // Update parallax from input
     const parallax = this.inputManager.getParallax()
-
-    // Update camera position
     this.sceneManager.updateCamera(this.scroll, parallax)
-
-    // Update computer group
     this.sceneManager.updateComputerGroup(this.scroll)
-
-    // Update canvas opacity
     this.sceneManager.updateCanvasOpacity(this.scroll)
-
-    // Update screen
     this.screen.tick(deltaTime, elapsedTime)
-
-    // Render the scene
     this.sceneManager.render()
-
     this.stats.end()
-
-    // Continue animation loop
     this.animationId = window.requestAnimationFrame(() => this.tick())
   }
 
@@ -163,7 +146,6 @@ export class WebGLController {
   }
 }
 
-// Main entry point function
 export default function WebGL(): void {
   const canvas = document.querySelector('canvas.webgl') as HTMLCanvasElement
   if (!canvas) {
@@ -171,10 +153,7 @@ export default function WebGL(): void {
     return
   }
 
-  // Check for debug mode
   const debugMode = window.location.hash.toLowerCase() === '#debug'
-
-  // Initial viewport setup
   const sizes: ViewportSizes = {
     width: document.documentElement.clientWidth,
     height: window.innerHeight,
@@ -185,7 +164,6 @@ export default function WebGL(): void {
     ),
   }
 
-  // Camera control properties
   const controlProps: CameraControls = {
     computerHeight: 0,
     computerAngle: Math.PI * 0.2,
@@ -203,10 +181,8 @@ export default function WebGL(): void {
     debugMode,
   }
 
-  // Create and initialize the WebGL controller
   const webglController = new WebGLController(config)
 
-  // Expose globally for debugging
   if (debugMode) {
     ;(window as { webglController?: WebGLController }).webglController = webglController
   }

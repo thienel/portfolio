@@ -12,15 +12,12 @@ const disk: FolderBash = {
   ],
 }
 
-/*
-Generate virtual file system based of "../file-system" folder.
-*/
 function generateFS(fileMap: Record<string, string>) {
   for (const path in fileMap) {
     const virtualFsPath = path.split('/').slice(2)
     let currentFolder = disk
     virtualFsPath.forEach((name, i, arr) => {
-      const isFile = i === arr.length - 1 // last item of virtualFsPath will always be a file.
+      const isFile = i === arr.length - 1
       if (isFile) {
         currentFolder.children.push({ name, data: fileMap[path] })
       } else {
@@ -67,22 +64,17 @@ export default function FileSystemBash() {
     for (const p of newPathArray) {
       switch (p) {
         case '':
-          // go to root
           path = [disk]
           break
         case '..':
-          // go up a folder
           if (path.length > 1) path.pop()
           break
         case '~':
-          // go home
           path = goHome()
           break
         case '.':
-          // current folder
           break
         default: {
-          // goto next location
           const currentFolder = path.length > 0 ? path[path.length - 1] : undefined
           if (!currentFolder || !('children' in currentFolder)) return undefined
 
@@ -122,7 +114,6 @@ export default function FileSystemBash() {
 
     if (!currentFolder || !('children' in currentFolder)) return 'bad_path'
 
-    // Check if folder allready exisits
     if (currentFolder.children.find(m => m.name === name)) return 'file_exists'
 
     currentFolder.children.push(type === 'folder' ? { name, children: [] } : { name, data: '' })

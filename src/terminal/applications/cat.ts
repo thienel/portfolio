@@ -29,7 +29,7 @@ export default function cat(print: PrintFunction, path: FileSystemPath, rootNode
       if (pathParts.length === 0) {
         if (path.p.length === 0) {
           const homePath = getHomePath(rootNode)
-          currentDir = homePath[homePath.length - 1] // Get the user directory
+          currentDir = homePath[homePath.length - 1]
         } else {
           currentDir = resolveCurrentDir(rootNode, path)
         }

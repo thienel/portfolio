@@ -16,7 +16,6 @@
 .section-header {
   animation: fadeInUp 0.6s ease-out;
 
-  // Disable animation when using scroll-triggered animations
   &.no-animation {
     animation: none;
   }
@@ -63,7 +62,6 @@
     animation-delay: 0.6s;
   }
 
-  // Disable animation when using scroll-triggered animations
   &.no-animation {
     animation: none;
   }

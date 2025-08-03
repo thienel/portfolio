@@ -37,7 +37,7 @@ function About() {
           Currently focused on <span className={cx('highlight')}>Golang development</span>, building
           robust APIs and exploring system design. Thanks for stopping by! Feel free to explore my{' '}
           <a
-            href={'/resume/LeHungThien-GolangDeveloper-Resume.pdf'}
+            href={'/resume/LeHungThien_GolangIntern_Resume.pdf'}
             target="_blank"
             rel="noopener noreferrer"
             className={cx('resume-link')}

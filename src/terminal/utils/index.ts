@@ -70,7 +70,6 @@ export function splitCommand(command: string): [string, string[]] {
 
 export function formatPath(path: Array<{ name: string }>): string {
   const fullPath = path.map(p => p.name).join('/')
-  // Replace home/user with ~ for a cleaner prompt
   const shortened = fullPath.replace(/^home\/user/, '~')
   return shortened === '~' ? '~' : shortened === '' ? '/' : `${shortened}`
 }

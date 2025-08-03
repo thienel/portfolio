@@ -3,7 +3,6 @@ export { BashEmulator } from './core/BashEmulator'
 export * from './types'
 export * from './utils'
 
-// Legacy export for backwards compatibility
 import { TerminalController } from './core/TerminalController'
 import { TerminalEngine } from './types'
 

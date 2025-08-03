@@ -16,7 +16,6 @@ function Preloader({ isLoading, onComplete }: PreloaderProps) {
   useEffect(() => {
     if (!isLoading) return
 
-    // Wait a bit for components to render
     const checkImages = () => {
       const images = Array.from(document.querySelectorAll('img'))
       const totalImages = images.length
@@ -25,16 +24,14 @@ function Preloader({ isLoading, onComplete }: PreloaderProps) {
       console.log(`Found ${totalImages} images to load`)
 
       if (totalImages === 0) {
-        // If no images, wait a bit longer and check again
         setTimeout(() => {
           const newImages = Array.from(document.querySelectorAll('img'))
           if (newImages.length === 0) {
             setProgress(100)
-            // Start animations immediately when progress reaches 100%
             setIsVisible(false)
-            setTimeout(onComplete, 300) // Just fade out time
+            setTimeout(onComplete, 300)
           } else {
-            checkImages() // Recursive check
+            checkImages()
           }
         }, 500)
         return
@@ -46,9 +43,8 @@ function Preloader({ isLoading, onComplete }: PreloaderProps) {
         console.log(`Progress: ${Math.round(currentProgress)}% (${loadedImages}/${totalImages})`)
 
         if (loadedImages === totalImages) {
-          // Start animations immediately when progress reaches 100%
           setIsVisible(false)
-          setTimeout(onComplete, 300) // Just fade out time
+          setTimeout(onComplete, 300)
         }
       }
 
@@ -62,7 +58,6 @@ function Preloader({ isLoading, onComplete }: PreloaderProps) {
         updateProgress()
       }
 
-      // Check if images are already loaded or add listeners
       images.forEach(img => {
         if (img.complete && img.naturalHeight !== 0) {
           loadedImages++
@@ -72,11 +67,9 @@ function Preloader({ isLoading, onComplete }: PreloaderProps) {
         }
       })
 
-      // Initial progress update
       updateProgress()
     }
 
-    // Wait for components to mount and render
     setTimeout(checkImages, 300)
   }, [isLoading, onComplete])
 

@@ -59,7 +59,6 @@ export class SceneManager {
 
     group.add(assists.screenMesh)
 
-    // Initial positioning
     group.position.x = this.controlProps.computerHorizontal
     group.position.y = this.controlProps.computerHeight
     group.rotation.y = this.controlProps.computerAngle
@@ -87,23 +86,18 @@ export class SceneManager {
       [0, 2.5],
     )
 
-    // Update camera
     this.camera.aspect = this.sizes.width / this.sizes.height
     this.camera.updateProjectionMatrix()
-
-    // Update renderer
     this.renderer.setSize(this.sizes.width, this.sizes.height)
   }
 
   public updateCamera(scroll: number, parallax: { x: number; y: number }): void {
-    // Update camera position based on scroll
     this.camera.position.z = clampedMap(
       scroll,
       [0, 1],
       [-3.25 - this.sizes.portraitOffset, -10 - this.sizes.portraitOffset],
     )
 
-    // Apply parallax effect
     this.camera.position.x =
       parallax.x * clampedMap(scroll, [0, 1], [0.2, 5]) * 0.1 + this.camera.position.x * 0.9
     this.camera.position.y =
@@ -115,7 +109,6 @@ export class SceneManager {
   public updateComputerGroup(scroll: number): void {
     const zoomFac = clampedMap(scroll, [0, 1], [0, 1])
 
-    // Update computer group positioning
     this.computerGroup.position.x = this.controlProps.computerHorizontal * zoomFac
     this.computerGroup.position.y = clampedMap(
       scroll,
@@ -124,14 +117,11 @@ export class SceneManager {
     )
     this.computerGroup.rotation.y = this.controlProps.computerAngle * zoomFac
 
-    // Handle portrait mode rotation
     if (this.sizes.portraitOffset > 0.5) {
       this.computerGroup.rotation.z = clampedMap(scroll, [0, 1], [-Math.PI / 2, 0])
     } else {
       this.computerGroup.rotation.z = 0
     }
-
-    // CRT morphing effect
   }
 
   public updateCanvasOpacity(scroll: number): void {

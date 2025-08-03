@@ -5,7 +5,6 @@ import { Assists } from '../types'
 import { Change } from '../../terminal'
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js'
 
-// const textColor = '#f99021'
 const textColor = '#F2F2F2'
 
 type FontInfo = {
@@ -270,10 +269,8 @@ export default function ScreenTextEngine(assists: Assists, sceneRTT: THREE.Scene
 
     let currentToken: undefined | MDtoken = undefined
     for (let i = 0; i < md.length; i++) {
-      // fix error with CRLF
       if (md[i] === '\r') continue
 
-      // h1, h2, h3
       if (currentToken === undefined && md[i] === '#') {
         let type: 'h1' | 'h2' | 'h3' = 'h1'
         if (i + 1 < md.length && md[i + 1] === '#') {
@@ -292,9 +289,7 @@ export default function ScreenTextEngine(assists: Assists, sceneRTT: THREE.Scene
           emphasis: false,
           value: '',
         }
-      }
-      // br
-      else if (md[i] === '\n') {
+      } else if (md[i] === '\n') {
         if (currentToken !== undefined) {
           tokens.push(currentToken)
           currentToken = undefined
@@ -304,17 +299,13 @@ export default function ScreenTextEngine(assists: Assists, sceneRTT: THREE.Scene
           emphasis: false,
           value: '',
         })
-      }
-      // img
-      else if (currentToken === undefined && md[i] === '!') {
+      } else if (currentToken === undefined && md[i] === '!') {
         currentToken = {
           type: 'img',
           emphasis: false,
           value: '',
         }
-      }
-      // p
-      else if (currentToken === undefined) {
+      } else if (currentToken === undefined) {
         currentToken = {
           type: 'p',
           emphasis: false,
@@ -331,8 +322,6 @@ export default function ScreenTextEngine(assists: Assists, sceneRTT: THREE.Scene
             value: '',
           }
         }
-
-        // add char to token
       } else {
         currentToken.value += md[i]
       }
@@ -509,7 +498,6 @@ export default function ScreenTextEngine(assists: Assists, sceneRTT: THREE.Scene
       helper(inputBuffer[i], x, y)
     }
 
-    // Scroll if more then one line
     if (shouldScroll) {
       const newNumberOfInputLines = Math.floor(
         (inputBuffer.length + terminalPromptOffset) / charsPerLine,

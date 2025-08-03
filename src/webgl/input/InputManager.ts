@@ -8,7 +8,7 @@ export class InputManager {
   private parallax: ParallaxState = { x: 0, y: 0 }
   private listeners: Map<string, EventListener> = new Map()
   private lastMoveTime: number = 0
-  private moveThrottleDelay: number = 16 // ~60fps
+  private moveThrottleDelay: number = 16
 
   constructor(canvas: HTMLCanvasElement) {
     this.canvas = canvas
@@ -16,7 +16,6 @@ export class InputManager {
   }
 
   private setupEventListeners(): void {
-    // Mouse/Touch movement with manual throttling
     const handlePointerMove = (event: Event) => {
       const now = Date.now()
       if (now - this.lastMoveTime < this.moveThrottleDelay) {
@@ -43,12 +42,10 @@ export class InputManager {
       this.mouseState = null
     }
 
-    // Store references for cleanup
     this.listeners.set('pointermove', handlePointerMove)
     this.listeners.set('pointerdown', handlePointerDown)
     this.listeners.set('pointerup', handlePointerUp)
 
-    // Add event listeners
     this.canvas.addEventListener('pointermove', handlePointerMove, { passive: true })
     this.canvas.addEventListener('pointerdown', handlePointerDown, { passive: true })
     document.addEventListener('pointerup', handlePointerUp, { passive: true })
@@ -82,7 +79,6 @@ export class InputManager {
   }
 
   public dispose(): void {
-    // Remove event listeners
     this.listeners.forEach((listener, eventType) => {
       if (eventType === 'pointerup') {
         document.removeEventListener(eventType, listener)
@@ -200,14 +196,12 @@ export class TerminalInputManager {
       this.onInputChange({ type: 'none', loc: 'none', str: '' }, this.textarea.selectionStart)
     }
 
-    // Store references for cleanup
     this.listeners.set('input', handleInput)
     this.listeners.set('canvasClick', handleCanvasClick)
     this.listeners.set('keypress', handleKeyPress)
     this.listeners.set('keydown', handleKeyDown)
     this.listeners.set('selectionchange', handleSelectionChange)
 
-    // Add event listeners
     this.textarea.addEventListener('input', handleInput)
     this.canvas.addEventListener('pointerup', handleCanvasClick)
     window.addEventListener('keypress', handleKeyPress)
@@ -216,7 +210,6 @@ export class TerminalInputManager {
   }
 
   private calculateStringChange(oldStr: string, newStr: string): Change | null {
-    // This is a simplified version - you may want to use the utility function
     const lenDiff = oldStr.length - newStr.length
 
     if (lenDiff === 0) return null
@@ -229,7 +222,6 @@ export class TerminalInputManager {
   }
 
   public dispose(): void {
-    // Remove event listeners
     this.listeners.forEach((listener, eventType) => {
       switch (eventType) {
         case 'input':

@@ -6,5 +6,4 @@ export * from './types'
 export * from './utils/math'
 export * from './utils/common'
 
-// Re-export the main function as default
 export { default } from './core/WebGLController'

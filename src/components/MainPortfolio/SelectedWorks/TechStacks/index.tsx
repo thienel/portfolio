@@ -28,11 +28,9 @@ function TechStacks({ techs, isAnimatingOut }: { techs: string[]; isAnimatingOut
   const itemsRef = useRef<(HTMLDivElement | null)[]>([])
   const containerRef = useRef<HTMLDivElement | null>(null)
 
-  // Fade in animation when component mounts
   useEffect(() => {
     if (!containerRef.current) return
 
-    // Set initial state and fade in
     gsap.fromTo(
       containerRef.current,
       { opacity: 0 },
@@ -40,7 +38,6 @@ function TechStacks({ techs, isAnimatingOut }: { techs: string[]; isAnimatingOut
     )
   }, [])
 
-  // Fade out animation when isAnimatingOut becomes true
   useEffect(() => {
     if (!isAnimatingOut || !containerRef.current) return
 
@@ -51,7 +48,6 @@ function TechStacks({ techs, isAnimatingOut }: { techs: string[]; isAnimatingOut
     })
   }, [isAnimatingOut])
 
-  // Handle tech selection changes
   useEffect(() => {
     const validItems = itemsRef.current.filter(item => item !== null)
 

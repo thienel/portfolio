@@ -14,11 +14,8 @@
   overflow-y: scroll;
   scrollbar-width: none;
   scroll-behavior: smooth;
-
-  // Initial state - hidden until preloader completes
   opacity: 0;
 
-  // Show content after preloader
   &.content-visible {
     opacity: 1;
     animation: contentFadeIn 1s ease-out;

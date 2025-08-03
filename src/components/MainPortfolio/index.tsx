@@ -17,10 +17,9 @@ function MainPortfolio() {
   const [showContent, setShowContent] = useState(false)
 
   useEffect(() => {
-    // Wait for component to mount and then start checking for image loading
     const timer = setTimeout(() => {
       setIsLoading(false)
-    }, 100) // Short delay to ensure component is mounted
+    }, 100)
 
     return () => clearTimeout(timer)
   }, [])
