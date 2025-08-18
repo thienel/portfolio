@@ -14,10 +14,6 @@ type Assists = {
 function loadAssists(callback: (assists: Assists) => void) {
   const assists: Assists = {} as Assists
 
-  const loadingDOM = document.querySelector('#loading')
-  const loadingItemsDOM = document.querySelector('#loading-items')
-  const loadingBarDOM = document.querySelector('#loading-bar-progress')
-
   const manager = new THREE.LoadingManager()
 
   manager.onStart = function (url, itemsLoaded, itemsTotal) {
@@ -27,23 +23,13 @@ function loadAssists(callback: (assists: Assists) => void) {
   }
 
   manager.onLoad = function () {
-    if (!loadingItemsDOM) return
-    loadingItemsDOM.textContent = `Nearly There...`
-
     console.log('Loading complete!')
     window.setTimeout(() => {
-      ;(loadingDOM as HTMLElement).style.opacity = '0'
       callback(assists as Assists)
     }, 200)
-    window.setTimeout(() => {
-      ;(loadingDOM as HTMLElement).style.display = 'none'
-    }, 500)
   }
 
   manager.onProgress = function (url, itemsLoaded, itemsTotal) {
-    if (!loadingItemsDOM || !loadingBarDOM) return
-    ;(loadingBarDOM as HTMLElement).style.transform = `scaleX(${itemsLoaded / itemsTotal})`
-    loadingItemsDOM.textContent = `${itemsLoaded} of ${itemsTotal} File Loaded: ${url}`
     console.log(
       'Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.',
     )

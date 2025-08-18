@@ -6,22 +6,11 @@ import { Assists, LoadingCallback, ProgressCallback, LoadingProgress } from '../
 export class AssetLoader {
   private manager: THREE.LoadingManager
   private assists: Partial<Assists> = {}
-  private loadingElements: {
-    loadingDOM: Element | null
-    itemsDOM: Element | null
-    progressDOM: Element | null
-  }
 
   constructor(
     private onComplete: LoadingCallback,
     private onProgress?: ProgressCallback,
   ) {
-    this.loadingElements = {
-      loadingDOM: document.querySelector('#loading'),
-      itemsDOM: document.querySelector('#loading-items'),
-      progressDOM: document.querySelector('#loading-bar-progress'),
-    }
-
     this.manager = new THREE.LoadingManager()
     this.setupLoadingManager()
   }
@@ -47,24 +36,10 @@ export class AssetLoader {
   }
 
   private handleLoadingComplete(): void {
-    if (this.loadingElements.itemsDOM) {
-      this.loadingElements.itemsDOM.textContent = 'Nearly there...'
-    }
-
     console.log('Loading complete!')
-
     setTimeout(() => {
-      if (this.loadingElements.loadingDOM) {
-        ;(this.loadingElements.loadingDOM as HTMLElement).style.opacity = '0'
-      }
       this.onComplete(this.assists as Assists)
     }, 200)
-
-    setTimeout(() => {
-      if (this.loadingElements.loadingDOM) {
-        ;(this.loadingElements.loadingDOM as HTMLElement).style.display = 'none'
-      }
-    }, 500)
   }
 
   public async loadAssets(): Promise<void> {
