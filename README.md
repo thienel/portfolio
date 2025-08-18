@@ -1,69 +1,84 @@
-# React + TypeScript + Vite
+# Personal Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+My interactive portfolio website showcasing my projects and skills, built with modern web technologies including React, TypeScript, and Three.js.
 
-Currently, two official plugins are available:
+**Live Website**: [lethien.dev](https://lethien.dev)
+**Portfolio Section**: [lethien.dev/portfolio](https://lethien.dev/portfolio)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **Interactive 3D Environment**: Built with Three.js featuring custom shaders and 3D models
+- **Terminal Emulator**: Custom bash emulator with file system simulation and interactive commands
+- **Smooth Animations**: GSAP-powered transitions and scroll-triggered animations
+- **Responsive Design**: Optimized for desktop, tablet, and mobile devices
+- **Modern UI**: Clean design with particle wave backgrounds and smooth preloader
+- **Project Showcase**: Gallery of my work with detailed project information
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tech Stack
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- React 19 with TypeScript
+- Three.js for 3D graphics and WebGL
+- GSAP for animations
+- SCSS/Sass for styling
+- Vite build tool
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## Project Structure
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+src/
+├── components/          # React components
+│   ├── MainPortfolio/  # Main portfolio sections (About, Works, Certificates)
+│   ├── Welcome/        # Animated welcome screen
+│   └── Preloader/      # Loading animation
+├── terminal/           # Terminal emulator implementation
+├── webgl/              # Three.js setup and utilities
+├── hooks/              # Custom React hooks
+└── styles/             # Global styles and SCSS variables
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Development
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Prerequisites
+- Node.js (v18 or higher)
+- npm or yarn
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/thienel/portfolio.git
+cd portfolio
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
 ```
+
+The development server will be available at `http://localhost:5173`.
+
+## Key Features
+
+### Terminal Emulator
+- Custom implementation of a bash-like terminal
+- File system navigation with commands like `ls`, `cd`, `cat`
+- Interactive help system and command history
+- Simulated file structure with project information
+
+### 3D Environment
+- WebGL-powered graphics using Three.js
+- Custom vertex and fragment shaders
+- Interactive camera controls and lighting
+- Optimized for performance across devices
+
+### Portfolio Sections
+- **About**: Personal information, skills, and background
+- **Selected Works**: Project showcase with screenshots and descriptions
+- **Certificates**: Educational achievements and certifications
+- **Contact**: Professional contact information
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
