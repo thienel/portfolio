@@ -11,6 +11,8 @@ html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 button {
@@ -23,6 +25,8 @@ body {
   background-color: $black;
   color: $white;
   overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
 }
 
 ul,
@@ -62,4 +66,23 @@ h5,
 h6 {
   font-size: inherit;
   font-weight: normal;
+}
+
+* {
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  html,
+  body {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+    width: 100% !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    max-width: 100% !important;
+  }
 }
