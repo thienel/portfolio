@@ -36,7 +36,7 @@ function Project({ title, type, description, year, githubUrl, imageUrl }: Projec
       <div className={cx('body')} ref={bodyRef}>
         {imageUrl && <img src={imageUrl} alt={`${title} preview`} className={cx('image')} />}
         <div className={cx('body-item', 'event')}>
-          <h2>Event</h2>
+          <h2>Type</h2>
           <p>Personal Project</p>
         </div>
         <div className={cx('body-item', 'year', { noimg: !imageUrl })}>

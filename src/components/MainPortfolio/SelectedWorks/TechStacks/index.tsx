@@ -22,6 +22,7 @@ const techList = [
   { id: 'MySQL', title: 'MySQL', size: '25px' },
   { id: 'Js', title: 'Javascript', size: '15px' },
   { id: 'Ts', title: 'TypeScript', size: '15px' },
+  { id: 'gRPC', title: 'gRPC', size: '0px' },
 ] as const
 
 function TechStacks({ techs, isAnimatingOut }: { techs: string[]; isAnimatingOut: boolean }) {

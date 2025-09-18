@@ -34,11 +34,13 @@ const projectsData = [
     title: 'Tiktok Clone Backend',
     type: 'Web API',
     description:
-      "This project provides the API for the TikTokClone UI (mentioned below). It's built strictly adhering to Clean Architecture principles and uses JWT for user authentication. Additionally, it includes rate limiting and a global error handling middleware. In the future, this project will be expanded to cover video and messaging functionalities, moving towards a microservices architecture.",
+    "This project provides the API for the TikTokClone UI (mentioned below). It's built strictly adhering to Clean Architecture principles and uses JWT for user authentication. Additionally, it includes rate limiting and a global error handling middleware. \n"+
+      "\n"+
+      "The project is transitioning to a microservices architecture, with a video microservice built in Go using gRPC for internal communication. Future expansions will cover messaging and other functionalities as separate microservices.",
     technologies: ['C#', 'SQL Server', 'JWT', 'Entity Framework', 'Identity'],
     githubUrl: 'https://github.com/thienel/tiktok-clone-api',
     year: 2025,
-    techs: ['Cs', 'SqlServer', 'entity', 'identity', 'jwt', 'cleanarchitecture', 'smtp'],
+    techs: ['Cs', 'SqlServer', 'entity', 'identity', 'jwt', 'cleanarchitecture', 'smtp', 'Go', 'PostgreSQL', 'gRPC'],
   },
   {
     title: 'Tiktok Clone Frontend',
