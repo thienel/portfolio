@@ -38,7 +38,7 @@ const projectsData = [
       "\n"+
       "The project is transitioning to a microservices architecture, with a video microservice built in Go using gRPC for internal communication. Future expansions will cover messaging and other functionalities as separate microservices.",
     technologies: ['C#', 'SQL Server', 'JWT', 'Entity Framework', 'Identity'],
-    githubUrl: 'https://github.com/thienel/tiktok-clone-api',
+    githubUrl: 'https://github.com/thienel/tiktok-clone/tree/main/backend',
     year: 2025,
     techs: ['Cs', 'SqlServer', 'entity', 'identity', 'jwt', 'cleanarchitecture', 'smtp', 'Go', 'PostgreSQL', 'gRPC'],
   },
@@ -48,7 +48,7 @@ const projectsData = [
     description:
       'This project meticulously simulates the UI and details of TikTok. It incorporates features like theme switching, real-time form validation, and comprehensive authentication related functionalities.',
     technologies: ['ReactJS', 'SCSS', 'Axios'],
-    githubUrl: 'https://github.com/thienel/tiktok-clone-ui',
+    githubUrl: 'https://github.com/thienel/tiktok-clone/tree/main/frontend',
     year: 2025,
     imageUrl: '/images/TiktokCloneUI.png',
     techs: ['React', 'jwt', 'Js', 'Scss'],
