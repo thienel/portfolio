@@ -10,37 +10,47 @@ const cx = classNames.bind(styles)
 
 const projectsData = [
   {
-    title: 'Greenlight',
-    type: 'REST API',
-    description:
-      "This project provides RESTful API access for movie database management. Authentication is token-based, secured with bcrypt at a cost of 12, and authorization employs a permission-based access control scheme. The project's architecture and implementation largely follow Alex Edwards' \"Let's Go Further,\" incorporating key best practices such as data filtering and pagination, structured JSON logging, API rate limiting, and graceful application shutdown.",
-    technologies: ['Golang', 'PostgreSQL'],
-    githubUrl: 'https://github.com/thienel/greenlight',
-    year: 2025,
-    techs: ['Go', 'PostgreSQL', 'smtp'],
-  },
-  {
-    title: 'Snippetbox',
+    title: 'EV Warranty Management System',
     type: 'Web Application',
     description:
-      'This project implements time-limited snippet storage, with user authentication managed via database-persisted sessions. The system incorporates both unit tests and integration tests to ensure its reliability.',
-    technologies: ['Golang', 'MySQL'],
-    githubUrl: 'https://github.com/thienel/snippetbox',
+      'Developed a full-stack EV warranty management system with a Go microservice backend, a .NET backend, and a React TypeScript frontend. Designed the Go service using Clean Architecture and Gin, delivering 35+ RESTful endpoints. Achieved 98.6% test coverage using Ginkgo & Gomega with a BDD approach. Implemented authentication with RSA JWT, Google OAuth 2.0, and RBAC. Optimized PostgreSQL using GORM with transactional flows and integrated Cloudinary for media storage. The system was containerized with Docker and deployed via Nginx on AWS EC2. CI/CD pipelines were automated using GitHub Actions to run tests, build Docker images, and deploy.',
+    githubUrl: 'https://github.com/thienel/ev-warranty',
     year: 2025,
-    imageUrl: '/images/SnippetBox.png',
-    techs: ['Go', 'MySQL'],
+    techs: [
+      'gorm',
+      'gin',
+      'Docker',
+      'Nginx',
+      'Google',
+      'Cloudinary',
+      'jwt',
+      'cleanarchitecture',
+      'Go',
+      'PostgreSQL',
+    ],
   },
   {
     title: 'Tiktok Clone Backend',
     type: 'Web API',
     description:
-    "This project provides the API for the TikTokClone UI (mentioned below). It's built strictly adhering to Clean Architecture principles and uses JWT for user authentication. Additionally, it includes rate limiting and a global error handling middleware. \n"+
-      "\n"+
-      "The project is transitioning to a microservices architecture, with a video microservice built in Go using gRPC for internal communication. Future expansions will cover messaging and other functionalities as separate microservices.",
+      "This project provides the API for the TikTokClone UI (mentioned below). It's built strictly adhering to Clean Architecture principles and uses JWT for user authentication. Additionally, it includes rate limiting and a global error handling middleware. \n" +
+      '\n' +
+      'The project is transitioning to a microservices architecture, with a video microservice built in Go using gRPC for internal communication. Future expansions will cover messaging and other functionalities as separate microservices.',
     technologies: ['C#', 'SQL Server', 'JWT', 'Entity Framework', 'Identity'],
     githubUrl: 'https://github.com/thienel/tiktok-clone/tree/main/backend',
     year: 2025,
-    techs: ['Cs', 'SqlServer', 'entity', 'identity', 'jwt', 'cleanarchitecture', 'smtp', 'Go', 'PostgreSQL', 'gRPC'],
+    techs: [
+      'Cs',
+      'SqlServer',
+      'entity',
+      'identity',
+      'jwt',
+      'cleanarchitecture',
+      'smtp',
+      'Go',
+      'PostgreSQL',
+      'gRPC',
+    ],
   },
   {
     title: 'Tiktok Clone Frontend',
@@ -53,6 +63,27 @@ const projectsData = [
     imageUrl: '/images/TiktokCloneUI.png',
     techs: ['React', 'jwt', 'Js', 'Scss'],
   },
+  {
+    title: 'Greenlight',
+    type: 'REST API',
+    description:
+      "This project provides RESTful API access for movie database management. Authentication is token-based, secured with bcrypt at a cost of 12, and authorization employs a permission-based access control scheme. The project's architecture and implementation largely follow Alex Edwards' \"Let's Go Further,\" incorporating key best practices such as data filtering and pagination, structured JSON logging, API rate limiting, and graceful application shutdown.",
+    technologies: ['Golang', 'PostgreSQL'],
+    githubUrl: 'https://github.com/thienel/greenlight',
+    year: 2025,
+    techs: ['Go', 'PostgreSQL', 'smtp'],
+  },
+  // {
+  //   title: 'Snippetbox',
+  //   type: 'Web Application',
+  //   description:
+  //     'This project implements time-limited snippet storage, with user authentication managed via database-persisted sessions. The system incorporates both unit tests and integration tests to ensure its reliability.',
+  //   technologies: ['Golang', 'MySQL'],
+  //   githubUrl: 'https://github.com/thienel/snippetbox',
+  //   year: 2025,
+  //   imageUrl: '/images/SnippetBox.png',
+  //   techs: ['Go', 'MySQL'],
+  // },
   {
     title: 'Portfolio',
     type: 'Website',
@@ -152,7 +183,7 @@ function SelectedWorks() {
   return (
     <div className={cx('wrapper')} ref={sectionRef} id="selected-works">
       <div className={cx('section-header')} ref={headerRef}>
-        <h1>Selected Works</h1>
+        <h1>Recent Projects</h1>
       </div>
 
       <div className={cx('projects-container')}>

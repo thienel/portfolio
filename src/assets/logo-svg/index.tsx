@@ -10,6 +10,10 @@ import Ts from './typescript.svg?react'
 import WebGL from './webgl.svg?react'
 import ReactIcon from './react.svg?react'
 import Scss from './sass.svg?react'
+import Nginx from './nginx.svg?react'
+import Docker from './docker.svg?react'
+import Google from './google.svg?react'
+import Cloudinary from './cloudinary.svg?react'
 
 const logoList = {
   Cs,
@@ -21,6 +25,10 @@ const logoList = {
   Ts,
   WebGL,
   Scss,
+  Nginx,
+  Docker,
+  Google,
+  Cloudinary,
   React: ReactIcon,
 } as const satisfies Record<string, FC<SVGProps<SVGSVGElement>>>
 
