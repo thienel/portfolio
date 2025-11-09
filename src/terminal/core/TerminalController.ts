@@ -1,4 +1,4 @@
-import titleText from '../../file-system/home/user/title/title.md?raw'
+import titleText from '~/title.md?raw'
 import { BashEmulator } from './BashEmulator'
 import { FileSystemNode, FileSystemPath, TerminalEngine } from '../types'
 import { calculateStringEditDistance, generateFS } from '../utils'

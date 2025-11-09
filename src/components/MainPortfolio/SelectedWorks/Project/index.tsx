@@ -9,11 +9,20 @@ interface ProjectProps {
   type: string
   description: string
   year: number
+  projectType?: string
   githubUrl?: string
   imageUrl?: string
 }
 
-function Project({ title, type, description, year, githubUrl, imageUrl }: ProjectProps) {
+function Project({
+  title,
+  type,
+  description,
+  year,
+  projectType,
+  githubUrl,
+  imageUrl,
+}: ProjectProps) {
   const { elementRef: titleRef } = useScrollAnimation({
     animationType: 'fadeUp',
     duration: 800,
@@ -37,7 +46,7 @@ function Project({ title, type, description, year, githubUrl, imageUrl }: Projec
         {imageUrl && <img src={imageUrl} alt={`${title} preview`} className={cx('image')} />}
         <div className={cx('body-item', 'event')}>
           <h2>Type</h2>
-          <p>Personal Project</p>
+          <p>{projectType || 'Personal Project'}</p>
         </div>
         <div className={cx('body-item', 'year', { noimg: !imageUrl })}>
           <h2>Year</h2>

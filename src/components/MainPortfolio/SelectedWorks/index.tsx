@@ -15,6 +15,7 @@ const projectsData = [
     description:
       'Developed a full-stack EV warranty management system with a Go microservice backend, a .NET backend, and a React TypeScript frontend. Designed the Go service using Clean Architecture and Gin, delivering 35+ RESTful endpoints. Achieved 98.6% test coverage using Ginkgo & Gomega with a BDD approach. Implemented authentication with RSA JWT, Google OAuth 2.0, and RBAC. Optimized PostgreSQL using GORM with transactional flows and integrated Cloudinary for media storage. The system was containerized with Docker and deployed via Nginx on AWS EC2. CI/CD pipelines were automated using GitHub Actions to run tests, build Docker images, and deploy.',
     githubUrl: 'https://github.com/thienel/ev-warranty',
+    projectType: 'School Project',
     year: 2025,
     techs: [
       'gorm',
@@ -200,6 +201,7 @@ function SelectedWorks() {
               type={project.type}
               description={project.description}
               year={project.year}
+              projectType={project.projectType}
               githubUrl={project.githubUrl}
               imageUrl={project.imageUrl}
             />
