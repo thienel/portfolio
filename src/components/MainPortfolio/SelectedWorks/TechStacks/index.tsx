@@ -23,7 +23,6 @@ const techList = [
   { id: 'Js', title: 'Javascript', size: '15px' },
   { id: 'Identity', title: 'Identity', size: '20px' },
   { id: 'jwt', title: 'JWT', size: '20px' },
-  { id: 'MySQL', title: 'MySQL', size: '25px' },
   { id: 'Cloudinary', title: 'Cloudinary', size: '20px' },
   { id: 'WebGL', title: 'WebGL', size: '30px' },
   { id: 'Nginx', title: 'Nginx', size: '20px' },
