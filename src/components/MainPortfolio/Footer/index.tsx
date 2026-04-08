@@ -69,7 +69,7 @@ function Footer() {
               <ul>
                 <li>
                   <a
-                    href="/resume/LeHungThien_Backend_Intern_Resume.pdf"
+                    href="/resume/LeHungThien_Backend_Resume.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                     className={cx('footer-link')}

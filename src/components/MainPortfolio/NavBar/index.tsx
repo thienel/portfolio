@@ -17,7 +17,7 @@ function NavBar() {
           LinkedIn
         </a>
         <a
-          href="resume/LeHungThien_Backend_Intern_Resume.pdf"
+          href="resume/LeHungThien_Backend_Resume.pdf"
           target="_blank"
           rel="noopener noreferrer"
         >
